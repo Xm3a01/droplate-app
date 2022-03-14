@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateOrderDetailsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('order_details', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+            $table->float('selling_price')->nullable(); // when prodct ordered
+            $table->float('purchasing_price')->nullable(); // when prodct ordered
+            $table->float('vat')->nullable(); // when prodct ordered
+            $table->float('wholesale_price')->nullable(); // when prodct ordered
+            $table->integer('quantity');
+            $table->foreignId('order_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('order_details');
+    }
+}
