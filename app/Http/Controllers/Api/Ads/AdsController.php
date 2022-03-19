@@ -11,6 +11,12 @@ class AdsController extends Controller
 {
     public function index()
     {
-        return new AdsResource(Ads::first());
+        $ads = Ads::first();
+        
+        if(!is_null($ads)){
+            return new AdsResource($ads);
+        } else {
+            return response()->json(['message' => 'There is no Ads' , 'status' => false]);
+        }
     }
 }

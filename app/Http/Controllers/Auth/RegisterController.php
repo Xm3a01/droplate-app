@@ -48,10 +48,10 @@ class RegisterController extends Controller
     {
         $user = User::where('phone', $request->phone)->first();
         if(!$user) {
-            $otp = Otp::generate($request->phone, 4, 1000);
+            $otp = Otp::generate($request->phone, 4, 1);
     
             if($otp->status == true) {
-                $text = "Your Otp code is : " .$otp->token; // do message 
+                $text = "Your Otp code is : " .$otp->code; // do message 
             } 
             return $otp;
 
@@ -63,7 +63,7 @@ class RegisterController extends Controller
 
     public function check(Request $request)
     {
-        $otp = Otp::validate($request->phone , $request->token);
+        $otp = Otp::validate($request->phone , $request->code);
         return $otp;
     }
 
@@ -76,7 +76,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -93,23 +93,24 @@ class RegisterController extends Controller
 
         // return $request;
         $this->validate($request , [
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $user =  User::create([
-            'name' => $request->name,
+            // 'name' => $request->name,
             'phone' => $request->phone,
-            'email' => $request->email,
-            'age' => $request->age,
-            'gender' => $request->gender,
-            'address' => $request->address,
+            // 'email' => $request->email,
+            // 'age' => $request->age,
+            // 'gender' => $request->gender,
+            // 'address' => $request->address,
             'password' => Hash::make($request->password),
             
 
         ]);
 
         return response()->json([ 
+            'user' => $user, 
             'token' => $user->createToken('My-token')->plainTextToken , 
             'status' => true
         ]);

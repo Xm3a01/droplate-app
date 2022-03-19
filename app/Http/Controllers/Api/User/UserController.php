@@ -7,18 +7,23 @@ use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class UserController extends Controller
 {
-    public function show(User $user)
+    public function show()
     {
+        $user = User::find(Auth::guard('sanctum')->user()->id);
         return new UserResource($user);
     }
 
-    public function update(Request $request , User $user)
+    public function update(Request $request)
     {
+
+        $user = User::find(Auth::guard('sanctum')->user()->id);
 
         if($request->has('name')) {
             $user->name = $request->name;
@@ -38,7 +43,7 @@ class UserController extends Controller
         if($request->has('address')) {
             $user->address = $request->address;
         }
-        if($request->has('image')) {
+        if($request->has('image') && $request->image !='') {
            $user->clearMediaCollection('users');
            $user->addMedia($request->image)->toMediaCollection('users');
         }
@@ -71,10 +76,11 @@ class UserController extends Controller
     {
         $user  = User::where('phone' , $request->phone)->first();
         if($user) {
-            $otp = Otp::generate($request->phone, 4, 1000);
+            $otp = Otp::generate($request->phone, 4, 1);
 
             if($otp->status == true) {
-                $text = "Your Otp code is : " .$otp->token; // do message 
+                // Session
+                $text = "Your Otp code is : " .$otp->code; // do message 
             } 
 
             return $otp;
@@ -85,7 +91,8 @@ class UserController extends Controller
 
     public function reset_password_otp_check(Request $request)
     {
-        $otp = Otp::validate($request->phone , $request->token);
+        // return
+        $otp = Otp::validate($request->phone , $request->code);
         return $otp;
     }
 
@@ -96,10 +103,16 @@ class UserController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
         $user  = User::where('phone' , $request->phone)->first();
-        $user->update([
-            'password' => Hash::make($request->password)
-        ]);
-        return  response()->json(['message' => 'Password set Successfully' , 'status'=> false]);
+        if(!is_null($user)) {
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+            return  response()->json(['message' => 'Password set Successfully' , 'status'=> true]);
+
+        } else {
+            return  response()->json(['message' => 'You dont Have Accounte' , 'status'=> false]);
+
+        }
     }
 }
 

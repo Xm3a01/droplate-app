@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BrandResource;
+use App\Http\Resources\ImageResource;
 use App\Http\Resources\SubCategoryResource;
 
 class SubCategoryController extends Controller
@@ -26,5 +28,13 @@ class SubCategoryController extends Controller
                  ->orWhereJsonContains('name->en' , $request->name)->get();
 
         return SubCategoryResource::collection($sub_categories);
+    }
+
+
+    public function bestBrand()
+    {
+        $brands = SubCategory::latest()->take(10)->get();
+
+        return BrandResource::collection($brands);
     }
 }

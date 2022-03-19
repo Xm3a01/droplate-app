@@ -31,8 +31,8 @@ use App\Http\Controllers\Api\Favorite\FavoriteController;
 
 Route::group(['middleware' => 'auth:sanctum'] , function() {
 
-    Route::get('profile/{user}' , [UserController::class , 'show'])->name('profile.show');
-    Route::put('profile/{user}' , [UserController::class , 'update'])->name('profile.update');
+    Route::get('profile' , [UserController::class , 'show'])->name('profile.show');
+    Route::put('profile' , [UserController::class , 'update'])->name('profile.update');
     Route::put('change/password/{user}' , [UserController::class , 'change_password'])->name('change.password');
     
     Route::get('favorites' , [FavoriteController::class , 'index'])->name('favorites.index');
@@ -48,7 +48,8 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
     Route::get('products/{product}' , [ProductController::class ,'show'])->name('product.show');
     Route::get('categories' , [CategoryController::class ,'index'])->name('categories.index');
     Route::get('categories/{category}' , [CategoryController::class ,'show'])->name('categories.show');
-    Route::get('sub_categories' , [SubCategoryController::class ,'index'])->name('sub_categories.index');
+    Route::get('best/brands' , [SubCategoryController::class , 'bestBrand'])->name('favorites.index');
+    Route::get('sub_categories' , [SubCategoryController::class ,'index'])->name('best.brands');
     Route::get('sub_categories/{sub_category}' , [SubCategoryController::class ,'show'])->name('sub_categories.show');
     Route::get('regions' , [RegionController::class ,'index'])->name('regions.index');
     Route::get('regions/{region}' , [RegionController::class ,'show'])->name('regions.show');
@@ -64,8 +65,8 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
 Route::group(['middleware' => 'guest:sanctum'] , function() {
     Route::post('register' , [RegisterController::class , 'create'])->name('register');
     Route::post('login' , [LoginController::class , 'login'])->name('login');
-    Route::get('reset/password' , [UserController::class , 'reset_password'])->name('reset.password');
-    Route::get('reset/password/otp/check' , [UserController::class , 'reset_password_otp_check'])->name('reset.password.otp');
+    Route::post('reset/password' , [UserController::class , 'reset_password'])->name('reset.password');
+    Route::post('reset/password/otp/check' , [UserController::class , 'reset_password_otp_check'])->name('reset.password.otp');
     Route::post('new/password' , [UserController::class , 'new_password'])->name('new.password');
     Route::post('otp-generate' , [RegisterController::class , 'generate'])->name('otp.generate');   
     Route::post('otp-check' , [RegisterController::class , 'check'])->name('otp.check'); 
