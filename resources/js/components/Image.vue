@@ -3,7 +3,7 @@
      <span v-for="(input, k) in inputs" :key="k">
       <div class="row">
         <div class="col-md-11 mt-2">
-          <label for="">Slide {{3 + k}}</label>
+          <label for="">Image</label>
           <input
             type="file"
             name="images[]"
@@ -13,8 +13,10 @@
         </div>
         <!-- <div > -->
           <span class="col-md-1 mt-2">
-            <label for="">Action</label>
-            <i
+            <div class="row">
+              <div class="col-md-12"><label for="">More</label></div>
+              <div class="col-md-12">
+                <i
               class="fas fa-minus-circle"
               style="color: red"
               @click="remove(k, 1)"
@@ -26,6 +28,10 @@
               @click="add(k, 1)"
               v-show="k == inputs.length - 1"
             ></i>
+              </div>
+            </div>
+            
+            
           </span>
         <!-- </div> -->
       </div>

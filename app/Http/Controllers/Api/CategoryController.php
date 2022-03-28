@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\BrandsResource;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
@@ -17,8 +18,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category->with('subCategories');
-        return new CategoryResource($category);
+        $category->with('products');
+        return new BrandsResource($category);
     }
 
     public function filter(Request $request)
@@ -27,5 +28,11 @@ class CategoryController extends Controller
                  ->orWhereJsonContains('name->en' , $request->name)->get();
 
         return CategoryResource::collection($categories);
+    }
+
+    public function brand()
+    {
+        $categories = Category::with('products')->take(2)->get();
+        return BrandsResource::collection($categories);
     }
 }

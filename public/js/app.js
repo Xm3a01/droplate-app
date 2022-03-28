@@ -2135,6 +2135,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -21283,55 +21289,50 @@ var render = function () {
     _vm._l(_vm.inputs, function (input, k) {
       return _c("span", { key: k }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-11 mt-2" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("Slide " + _vm._s(3 + k)),
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control from-control-sm",
-              attrs: { type: "file", name: "images[]", id: "" },
-            }),
-          ]),
+          _vm._m(0, true),
           _vm._v(" "),
           _c("span", { staticClass: "col-md-1 mt-2" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("Action")]),
-            _vm._v(" "),
-            _c("i", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: k || (!k && _vm.inputs.length > 1),
-                  expression: "k || (!k && inputs.length > 1)",
-                },
-              ],
-              staticClass: "fas fa-minus-circle",
-              staticStyle: { color: "red" },
-              on: {
-                click: function ($event) {
-                  return _vm.remove(k, 1)
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c("i", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: k == _vm.inputs.length - 1,
-                  expression: "k == inputs.length - 1",
-                },
-              ],
-              staticClass: "fas fa-plus-circle",
-              staticStyle: { color: "blue" },
-              on: {
-                click: function ($event) {
-                  return _vm.add(k, 1)
-                },
-              },
-            }),
+            _c("div", { staticClass: "row" }, [
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: k || (!k && _vm.inputs.length > 1),
+                      expression: "k || (!k && inputs.length > 1)",
+                    },
+                  ],
+                  staticClass: "fas fa-minus-circle",
+                  staticStyle: { color: "red" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.remove(k, 1)
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: k == _vm.inputs.length - 1,
+                      expression: "k == inputs.length - 1",
+                    },
+                  ],
+                  staticClass: "fas fa-plus-circle",
+                  staticStyle: { color: "blue" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.add(k, 1)
+                    },
+                  },
+                }),
+              ]),
+            ]),
           ]),
         ]),
       ])
@@ -21339,7 +21340,29 @@ var render = function () {
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-11 mt-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Image")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control from-control-sm",
+        attrs: { type: "file", name: "images[]", id: "" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("More")]),
+    ])
+  },
+]
 render._withStripped = true
 
 

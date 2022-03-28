@@ -176,7 +176,7 @@
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-12">
-                          <input type="file" name="image" id="" class="form-control">
+                          <input-image />
                         </div>
                       </div>
                     </div>

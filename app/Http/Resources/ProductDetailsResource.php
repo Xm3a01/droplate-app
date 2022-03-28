@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-// use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
 
-class ProductResource extends JsonResource
+class ProductDetailsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

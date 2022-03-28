@@ -48,12 +48,12 @@ class ProductController extends Controller
 
         // return $request;
         $product = Product::create($request->except('images'));
-        if($request->hasFile('image')) {
-            // $fileAdders = $product->addMultipleMediaFromRequest(['images'])
-            // ->each(function ($fileAdder) {
-            //     $fileAdder->toMediaCollection('products');
-            // });
-            $product->addMedia($request->file('image'))->toMediaCollection('products');
+        if($request->hasFile('images')) {
+            $fileAdders = $product->addMultipleMediaFromRequest(['images'])
+            ->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('products');
+            });
+            // $product->addMedia($request->file('image'))->toMediaCollection('products');
         }
 
         Session::flash('success' , 'Product Add Successfully');

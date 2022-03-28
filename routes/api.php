@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Auth\LoginController;
@@ -46,6 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
     Route::post('orders' , [OrderController::class , 'store']);
     Route::get('products' , [ProductController::class ,'index'])->name('product.index');
     Route::get('products/{product}' , [ProductController::class ,'show'])->name('product.show');
+    Route::get('brands' , [CategoryController::class ,'brand'])->name('brand');
     Route::get('categories' , [CategoryController::class ,'index'])->name('categories.index');
     Route::get('categories/{category}' , [CategoryController::class ,'show'])->name('categories.show');
     Route::get('best/brands' , [SubCategoryController::class , 'bestBrand'])->name('favorites.index');
@@ -79,6 +81,15 @@ Route::group(['prefix'=>'filter' , 'middleware' => 'auth:sanctum'] , function() 
     Route::get('sub_category' , [SubCategoryController::class ,'filter'])->name('sub_category.filter');
     Route::get('regions' , [RegionController::class ,'filter'])->name('regions.filter');
     Route::get('cities' , [CityController::class ,'filter'])->name('cities.filter');
+});
+
+
+Route::group(['prefix'=>'carts' , 'middleware' => 'auth:sanctum'] , function() {
+    Route::get('/' , [CartController::class ,'index'])->name('carts.index');
+    Route::post('add' , [CartController::class ,'add'])->name('carts.add');
+    Route::get('remove/{id}' , [CartController::class ,'remove'])->name('carts.remove');
+    Route::get('clear' , [CartController::class ,'clear'])->name('carts.remove');
+    // Route::get('cities' , [CityController::class ,'filter'])->name('cities.filter');
 });
 
 Route::get('ads' , [AdsController::class ,'index'])->name('ads');

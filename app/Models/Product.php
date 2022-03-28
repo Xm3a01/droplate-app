@@ -44,9 +44,9 @@ class Product extends Model implements HasMedia
      * @param  string  $value
      * @return string
      */
-    public function getImageAttribute()
+    public function getImagesAttribute()
     {
-        return $this->getFirstMediaUrl('products');
+        return $this->getMedia('products');
     }
 
     public function favorites()
