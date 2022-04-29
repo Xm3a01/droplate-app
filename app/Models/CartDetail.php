@@ -13,7 +13,13 @@ class CartDetail extends Model
     protected $fillable = [
         'quantity',
         'sub_total_price',
+        'purchasing_price',
+        'vat',
+        'wholesale_price',
         'price',
+        'sub_total_purchasing_price',
+        'sub_total_vat',
+        'sub_total_wholesale_price',
         'cart_id',
         'product_id',
     ];

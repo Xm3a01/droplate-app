@@ -110,7 +110,10 @@ class ProductController extends Controller
    
     public function destroy(Product $product)
     {
-        $product->clearMediaCollection('image');
+        // dd( $product);
+        if($product->images) {
+            $product->clearMediaCollection('products');
+        }
         $product->delete();
     }
 }

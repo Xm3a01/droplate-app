@@ -30,7 +30,6 @@ class ProductRequest extends FormRequest
             'en_description' => 'required',
             'purchasing_price' => 'required|numeric',
             'selling_price' => 'required|numeric',
-            'vat' => 'required|numeric',
             'wholesale_price' => 'required|numeric',
             'quantity' => 'required',
             'category_id' => 'required',

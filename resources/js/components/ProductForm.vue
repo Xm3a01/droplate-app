@@ -33,7 +33,7 @@
               v-for="sub_category in sub_categories_info"
               :key="sub_category.id"
               :selected="product_info.sub_category_id == sub_category.id"
-              :value="sub_category.id"
+              :value="sub_category ? sub_category.id : ''"
             >
               {{ sub_category.name.en }}
             </option>
@@ -82,14 +82,14 @@
           />
         </div>
         <div class="col-md-6">
-          <label for="exampleInputEmail1">Vat</label>
+          <label for="exampleInputEmail1">Discount</label>
           <input
             type="text"
-            name="vat"
-            v-model="product_info.vat"
+            name="discount"
+            v-model="product_info.discount"
             class="form-control form-control-sm"
             id=""
-            placeholder="Enter Vat"
+            placeholder="Enter Discount"
           />
         </div>
       </div>

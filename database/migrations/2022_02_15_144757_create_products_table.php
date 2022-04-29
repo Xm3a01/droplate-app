@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('descripton')->nullable();
             $table->float('purchasing_price')->nullable();
             $table->float('selling_price')->nullable();
-            $table->float('vat')->nullable();
+            $table->float('discount')->default(0);
             $table->float('wholesale_price')->nullable();
             $table->integer('quantity')->nullable();
             $table->foreignId('category_id')->nullable()->constrained();

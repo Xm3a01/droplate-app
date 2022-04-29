@@ -6,18 +6,22 @@ use App\Models\Order;
 use App\Models\Product;
 use Carbon\CarbonPeriod;
 use App\Models\OrderDetail;
+use App\Traits\WalletTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\OrderResource;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\OrderResource;
 
 class OrderController extends Controller
 {
    
+    use WalletTrait;
+
     public function index(Request $request)
     {
-        $orders = Order::with('orderDetails')->get();
+        $orders = Order::with('orderDetails')
+        ->where('user_id' , Auth::guard('sanctum')->user()->id)->get();
 
         return OrderResource::collection($orders);
     }
@@ -27,7 +31,8 @@ class OrderController extends Controller
     {
         // final code for order
         $order = $request->order;
-        $order['user_id'] = Auth::guard('sanctum')->user()->id;
+        $user_id = Auth::guard('sanctum')->user()->id;
+        $order['user_id'] = $user_id;
         $ordr = Order::create($order);
 
         foreach ($order['order_details'] as $key => $order_detail) {
@@ -35,6 +40,7 @@ class OrderController extends Controller
             OrderDetail::create($order_detail);
         }
 
+        // $this->order_wallet($user_id , $order->order_status);
         return response()->json(['message' => 'Order save successfully' , 'status' => true]);
 
     }
@@ -59,6 +65,11 @@ class OrderController extends Controller
         $order->update([
             'order_status' => $request->order_status
         ]);
+
+        if($order->order_status == 1) {
+            $user_id = Auth::guard('sanctum')->user()->id;
+            $this->order_wallet($user_id , $order->order_status);
+        }
 
         return response()->json(['message' => 'Order Status set  successfully' , 'status' => true]);
     }

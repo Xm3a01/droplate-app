@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\OrderDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
@@ -13,7 +14,7 @@ class Order extends Model
     public const CANCEL = 0;
     // public const DONE = 1;
 
-    use HasFactory;
+    use HasFactory , SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -22,7 +23,7 @@ class Order extends Model
         'order_status',
         // 'total_price',
         'delivery_price',
-        'total_vat',
+        'total_discount',
         'total_purchasing_price',
         'total_selling_price',
         'total_wholesale_price'

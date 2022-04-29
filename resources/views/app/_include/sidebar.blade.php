@@ -3,7 +3,7 @@
     <a href="/" class="brand-link">
         <img src="{{ asset('images/ms.png') }}" alt="AdminLTE Logo" class="brand-image  elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-bold text-primary">Droplate</span> App
+        <span class="brand-text font-weight-bold text-primary">Droplet</span> App
     </a>
 
     <!-- Sidebar -->
@@ -234,6 +234,16 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item {{ Request::is('*setting*') ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="{{ route('setting.index') }}" class="nav-link {{ Request::is('*setting*') ? 'active' : '' }}">
+                        <i class=" nav-icon  fa fa-cog"></i>
+                        <p>
+                            Settings
+                            {{-- <i class="right fas fa-angle-left"></i> --}}
+                            {{-- <span class="right badge badge-danger">{{ Route::is('tracing.index') ? $transfers->count() :  0}}</span> --}}
+                        </p>
+                    </a>
                 </li>
             </ul>
             </li>

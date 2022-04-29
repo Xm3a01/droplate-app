@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('order_status' , 1)->count();
+        $orders = Order::count();
         $products = Product::where('quantity' ,'>', 0)->count();
         $brands = SubCategory::count();
 

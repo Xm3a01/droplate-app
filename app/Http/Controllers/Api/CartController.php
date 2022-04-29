@@ -21,6 +21,7 @@ class CartController extends Controller
     }
     public function add(Request $request)
     {
+        // return $request;
         $cart = DB::transaction(function() use($request){
             $cart = Cart::where('user_id' , Auth::guard('sanctum')->user()->id)->first();
             if(is_null($cart)) {
@@ -32,16 +33,33 @@ class CartController extends Controller
             }
 
             $cartDetail = CartDetail::where('product_id' , $request->product_id)->first();
+            
             if(is_null($cartDetail)) {
+                if($request->quantity >= 100) {
+                    $request['price'] = $request->wholesale_price;
+                }
                 $cart->cartDetails()->create([
                     'quantity' => $request->quantity,
                     'sub_total_price' => ($request->quantity * $request->price),
+                    'sub_total_purchasing_price' => ($request->quantity * $request->purchasing_price),
+                    'sub_total_discount' => ($request->quantity * $request->vat),
+                    'sub_total_wholesale_price' => ($request->quantity * $request->wholesale_price),
                     'price' => $request->price,
+                    'purchasing_price' => $request->purchasing_price,
+                    'vat' => $request->vat,
+                    'wholesale_price' => $request->wholesale_price,
                     'product_id' => $request->product_id,
                 ]);
             } else {
+                if($cartDetail->quantity >= 100) {
+                    $request['price'] = $request->wholesale_price;
+                    $cartDetail->sub_total_price = $cartDetail->sub_total_wholesale_price;
+                }
                 $cartDetail->quantity += $request->quantity;
                 $cartDetail->sub_total_price += ($request->quantity * $request->price);
+                $cartDetail->sub_total_purchasing_price += $request->purchasing_price;
+                $cartDetail->sub_total_wholesale_price += $request->wholesale_price;
+                $cartDetail->sub_total_vat += ($request->quantity * $request->vat);
                 $cartDetail->save();
             }
 

@@ -23,7 +23,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('product-form', require('./components/ProductForm.vue').default);
 Vue.component('weight-input', require('./components/Weight.vue').default);
 Vue.component('input-image', require('./components/Image.vue').default);
+Vue.component('ar-input-image', require('./components/ArImage.vue').default);
 Vue.component('input-select', require('./components/Select.vue').default);
+Vue.component('setting-page', require('./components/SettingPage.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

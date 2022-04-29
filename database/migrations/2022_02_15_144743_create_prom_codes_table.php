@@ -17,6 +17,7 @@ class CreatePromCodesTable extends Migration
             $table->id();
             $table->float('price')->nullable();
             $table->string('code')->nullable();
+            $table->integer('user_id')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->timestamps();

@@ -15,7 +15,7 @@ class BrandsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->getTranslation('name' , 'en'),
+            'en_name' => $this->getTranslation('name' , 'en'),
             'ar_name' => $this->getTranslation('name' , 'ar'),
             'products' => ProductResource::collection($this->products)
         ];

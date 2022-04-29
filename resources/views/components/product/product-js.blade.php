@@ -38,7 +38,7 @@
             {data: 'descripton',name: 'descripton'},
             {data: 'purchasing_price',name: 'purchasing_price'},
             {data: 'selling_price',name: 'selling_price'},
-            {data: 'vat',name: 'vat'},
+            {data: 'discount',name: 'discount'},
             {data: 'wholesale_price',name: 'wholesale_price'},
             {data: 'quantity',name: 'quantity'},
             {data: 'category',name: 'category'},

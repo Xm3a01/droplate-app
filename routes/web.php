@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Dashboard\Ads\AdsController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\City\CityController;
 use App\Http\Controllers\Dashboard\User\UserController;
 use App\Http\Controllers\Dashboard\Order\OrderController;
@@ -61,6 +63,8 @@ Route::group(['middleware' => 'auth:admin'],function () {
     Route::get('profits', [ReportController::class, 'profitReport'])->name('profits');
     Route::get('clients', [ReportController::class, 'clientReport'])->name('clients');
     Route::get('delivery/price', [ReportController::class, 'deliveryReport'])->name('delivery.price');
+    Route::get('setting', [SettingController::class , 'index'])->name('setting.index');
+    Route::post('setting', [SettingController::class , 'update'])->name('setting.update');
 });
 
 Route::group(['prefix' => 'data-table' , 'middleware' => 'auth:admin'],function(){
@@ -74,7 +78,7 @@ Route::group(['prefix' => 'data-table' , 'middleware' => 'auth:admin'],function(
     Route::get('regions', [DataTableController::class , 'region'])->name('data.regions');
     Route::get('empolyees', [DataTableController::class , 'employee'])->name('data.empolyee');
     Route::get('users', [DataTableController::class , 'user'])->name('data.user');
-    Route::get('users', [DataTableController::class , 'user'])->name('data.user');
+    
 
    
 });
@@ -82,7 +86,14 @@ Route::group(['prefix' => 'data-table' , 'middleware' => 'auth:admin'],function(
 
 Route::get('test' , function(){
     // return "hello";
-    return Sms::send('Hello' , '09123456');
+    // return Sms::send('Hello' , '09123456');
+        // return "hello";
+        // return Sms::send('Hello' , '09123456');
+        // php artisan storage:link
+        
+        $artisan = Artisan::call('storage:link');
+        $output = Artisan::output();
+        return $output;
 
 });
 // Category::whereJsonContains('name->en' , 'En-Quinten Kihn')->get();

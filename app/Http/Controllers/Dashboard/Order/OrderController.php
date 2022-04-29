@@ -17,8 +17,6 @@ class OrderController extends Controller
     {
         
         $order->load('orderDetails.product');
-        // $order_details  = $order;
-        // return $order_details;
         return view('app.order.show' , ['order' => $order]);
         
     }

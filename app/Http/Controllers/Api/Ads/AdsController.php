@@ -11,7 +11,7 @@ class AdsController extends Controller
 {
     public function index()
     {
-        $ads = Ads::first();
+        $ads = Ads::query();
         
         if(!is_null($ads)){
             return new AdsResource($ads);

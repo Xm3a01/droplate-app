@@ -46,7 +46,7 @@
                     <th>Descripton</th>
                     <th>Purchasing price</th>
                     <th>Selling price</th>
-                    <th>vat</th>
+                    <th>Discount</th>
                     <th>Wholesale price</th>
                     <th>quantity</th>
                     <th>category</th>

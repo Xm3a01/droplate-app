@@ -17,10 +17,20 @@ class Ads extends Model implements HasMedia
       * @var array
       */
     //  protected $fillable = ['name'];
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'link',
+        'ar_link',
+        'image',
+        'ar_image'
+    ];
 
     public function getImagesAttribute()
     {
-        return $this->getMedia('ads');
+        return $this->getFirstMedia('ads');
+    }
+
+    public function getArImagesAttribute()
+    {
+        return $this->getFirstMedia('ar_ads');
     }
 }

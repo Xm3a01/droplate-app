@@ -22,7 +22,6 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-
         $user = User::find(Auth::guard('sanctum')->user()->id);
 
         if($request->has('name')) {

@@ -15,11 +15,18 @@ class CartDetailResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->product->id,
             'name' => $this->product->getTranslation('name' , 'en'),
             'ar_name' => $this->product->getTranslation('name' , 'ar'),
-            'quantity' => $this->quantity,
-            'price' => $this->price,
-            'sub_total_price' => $this->sub_total_price,
+            'quantity' => (int)$this->quantity,
+            'price' => (float)$this->price,
+            'sub_total_price' => (float)$this->sub_total_price,
+            'sub_total_purchasing_price' => (float)$this->sub_total_purchasing_price,
+            'sub_total_vat' => (float)$this->sub_total_vat,
+            'sub_total_wholesale_price' => (float)$this->sub_total_wholesale_price,
+            'purchasing_price' => (float)$this->purchasing_price,
+            'vat' => (float)$this->vat,
+            'wholesale_price' => (float)$this->wholesale_price,
             'images' => $this->product->images 
                   ? ImageResource::collection($this->product->images)
                   : "",

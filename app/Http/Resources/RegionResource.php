@@ -15,7 +15,8 @@ class RegionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
+            'en_name' => $this->getTranslation('name' , 'en'),
+            'ar_name' => $this->getTranslation('name' , 'ar'),
             'cities' => CityResource::collection($this->cities)
         ];
     }

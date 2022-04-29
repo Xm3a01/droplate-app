@@ -14,18 +14,20 @@ class ReportController extends Controller
 {
     public function profitReport(Request $request)
     {
-        $days  =  Order::select(DB::raw('(SUM(total_selling_price) - (SUM(total_purchasing_price) - SUM(total_vat))) as price')
+
+        // return Order::all();
+        $days  =  Order::select(DB::raw('(SUM(total_selling_price) - (SUM(total_purchasing_price) - SUM(total_discount))) as price')
                         ,DB::raw('DAYNAME(created_at) as day_name') , DB::raw('DAY(created_at) as day'))
                         ->whereBetween(DB::raw('DATE_FORMAT(created_at , "%Y-%m-%d")') ,[$request->from  , $request->to])
                         ->groupBy('day_name' , 'day')->orderBy('day')->get();
 
-        $months =    Order::select(DB::raw('(SUM(total_selling_price) - (SUM(total_purchasing_price) - SUM(total_vat))) as price')
+        $months =    Order::select(DB::raw('(SUM(total_selling_price) - (SUM(total_purchasing_price) - SUM(total_discount))) as price')
                         ,DB::raw('MONTHNAME(created_at) as month_name') , DB::raw('MONTH(created_at) as month'))
                         ->whereBetween(DB::raw('DATE_FORMAT(created_at , "%Y-%m-%d")') ,[$request->from  , $request->to])
                         ->groupBy('month_name' , 'month')->orderBy('month')->get();
 
 
-        $years =    Order::select(DB::raw('(SUM(total_selling_price) - (SUM(total_purchasing_price) - SUM(total_vat))) as price')
+        $years =    Order::select(DB::raw('(SUM(total_selling_price) - (SUM(total_purchasing_price) - SUM(total_discount))) as price')
                         ,DB::raw('YEAR(created_at) as year'))
                         ->whereBetween(DB::raw('DATE_FORMAT(created_at , "%Y-%m-%d")') ,[$request->from  , $request->to])
                         ->groupBy('year')->orderBy('year')->get();
@@ -55,6 +57,8 @@ class ReportController extends Controller
          $data['chart_data'] = json_encode($data);
          $data['chart_month'] = json_encode($moth);
          $data['chart_year'] = json_encode($yar);
+
+        //  return $data;
          $data['from'] = $request->from;
          $data['to'] = $request->to;
         return view('app.reoprt.profi_report' , $data);

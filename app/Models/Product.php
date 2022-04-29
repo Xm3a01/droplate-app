@@ -11,10 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory , InteractsWithMedia , HasTranslations;
+    use HasFactory , InteractsWithMedia , HasTranslations , SoftDeletes;
 
     protected $translatable = ['name' , 'descripton'];
     protected $fillable  =[
@@ -22,7 +23,7 @@ class Product extends Model implements HasMedia
         'descripton',
         'purchasing_price',
         'selling_price',
-        'vat',
+        'discount',
         'wholesale_price',
         'quantity',
         'category_id',

@@ -71,6 +71,7 @@
                             class="form-control form-control-sm thingSelect"
                             style="width: 100%"
                             placeholder="Arabic name"
+                            required
                           />
                         </div>
                         <div class="col-md-6">
@@ -80,6 +81,7 @@
                             class="form-control form-control-sm"
                             style="width: 100%"
                             placeholder="English name"
+                            required
                           />
                         </div>
                       </div>
@@ -94,16 +96,18 @@
                             class="form-control form-control-sm"
                             id="exampleInputEmail1"
                             placeholder="Enter Quantity"
+                            required
                           />
                         </div>
                         <div class="col-md-6">
-                          <label for="exampleInputEmail1">Vat</label>
+                          <label for="exampleInputEmail1">Discount</label>
                           <input
                             type="text"
-                            name="vat"
+                            name="discount"
                             class="form-control form-control-sm"
                             id=""
-                            placeholder="Enter Vat"
+                            placeholder="Enter Discount"
+                            required
                           />
                         </div>
                       </div>
@@ -118,6 +122,7 @@
                             class="form-control form-control-sm"
                             id=""
                             placeholder="Enter Selling price"
+                            required
                           />
                         </div>
                         <!-- purchasing_price -->
@@ -129,6 +134,7 @@
                             class="form-control form-control-sm"
                             id="exampleInputEmail1"
                             placeholder="Enter Wholesale price"
+                            required
                           />
                         </div>
                         <div class="col-md-4">
@@ -139,6 +145,7 @@
                             class="form-control form-control-sm"
                             id="exampleInputEmail1"
                             placeholder="Enter Purchasing price"
+                            required
                           />
                         </div>
                       </div>
@@ -153,6 +160,7 @@
                             class="form-control form-control-sm"
                             id="exampleInputEmail1"
                             placeholder="Enter Description"
+                            required
                           >
                           </textarea>
                         </div>
@@ -168,6 +176,7 @@
                             class="form-control form-control-sm"
                             id="exampleInputEmail1"
                             placeholder="Enter Description"
+                            required
                           >
                           </textarea>
                         </div>
@@ -177,7 +186,8 @@
                       <div class="row">
                         <div class="col-md-12">
                           <input-image />
-                        </div>
+                        </div>    
+
                       </div>
                     </div>
 

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -49,5 +50,10 @@ class DatabaseSeeder extends Seeder
                 'guard_name' => 'admin'
             ]);
         }
+
+        Setting::create([
+            'vat' => 15,
+            'points' => 10
+        ]);
     }
 }

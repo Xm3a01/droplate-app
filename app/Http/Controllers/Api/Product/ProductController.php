@@ -35,8 +35,8 @@ class ProductController extends Controller
         // $query->where('sub_category_id' , $request->sub_category_id);
 
         $products = $query->where('category_id' , $request->category_id)
-                     ->where('name->en' , $request->name)
-                     ->orWhere('name->ar' , $request->name)->get();
+                    ->where('name->en','LIKE', "%{$request->name}%")
+                    ->orWhere('name->ar', 'LIKE', "%{$request->name}%")->get();
 
         return ProductResource::collection($products);
     }

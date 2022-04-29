@@ -68,5 +68,10 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Review::class);
     }
 
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
 
 }

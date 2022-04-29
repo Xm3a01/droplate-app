@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('client_phone');
             $table->string('address');
-            $table->string('order_status');
+            $table->string('order_status')->default(1);
             $table->float('delivery_price');
-            $table->float('total_vat')->nullable();
+            $table->float('total_discount')->default(0)->nullable();
             $table->float('total_purchasing_price');
             $table->float('total_selling_price');
             $table->float('wholesale_price')->nullable(); // when prodct ordered

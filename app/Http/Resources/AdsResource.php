@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Ads;
+use App\Http\Resources\ArAdsResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdsResource extends JsonResource
@@ -15,7 +18,8 @@ class AdsResource extends JsonResource
     public function toArray($request)
     {
         return [
-           'slides'  => ImageResource::collection($this->images)
+            'en' => EnAdsResource::collection(Ads::whereNotNull('link')->whereNotNull('image')->get()),
+            'ar' => ArAdsResource::collection(Ads::whereNotNull('ar_link')->whereNotNull('ar_image')->get())  
         ];
     }
 }

@@ -58,7 +58,7 @@ class SubCategoryController extends Controller
         $categories = Category::all();
 
         return view('app.subcategory.edit', [
-            'sub_category' => $sub_category,
+            'sub' => $sub_category,
             'categories' => $categories
         ]);
     }

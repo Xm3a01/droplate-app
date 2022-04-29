@@ -18,6 +18,12 @@ class CreateCartDetailsTable extends Migration
             $table->integer('quantity')->nullable();
             $table->float('sub_total_price')->nullable();
             $table->float('price')->nullable();
+            $table->float('sub_total_purchasing_price')->nullable();
+            $table->float('sub_total_vat')->nullable();
+            $table->float('sub_total_wholesale_price')->nullable();
+            $table->float('purchasing_price')->nullable();
+            $table->float('vat')->nullable();
+            $table->float('wholesale_price')->nullable();
             $table->foreignId('cart_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();

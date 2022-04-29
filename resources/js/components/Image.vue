@@ -1,9 +1,9 @@
 <template>
-    <div class="col-md-12">
+    <span>
      <span v-for="(input, k) in inputs" :key="k">
       <div class="row">
         <div class="col-md-11 mt-2">
-          <label for="">Image</label>
+          <label for="">{{ label }}</label>
           <input
             type="file"
             name="images[]"
@@ -36,11 +36,12 @@
         <!-- </div> -->
       </div>
      </span>
-    </div>
+    </span>
 </template>
 
 <script>
 export default {
+  props:['label'],
   data() {
     return {
        inputs: [{
