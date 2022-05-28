@@ -18,8 +18,8 @@ class AdsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'en' => EnAdsResource::collection(Ads::whereNotNull('link')->whereNotNull('image')->get()),
-            'ar' => ArAdsResource::collection(Ads::whereNotNull('ar_link')->whereNotNull('ar_image')->get())  
+            'en' => EnAdsResource::collection(Ads::whereNotNull('image')->get()),
+            'ar' => ArAdsResource::collection(Ads::whereNotNull('ar_image')->get())  
         ];
     }
 }

@@ -14,21 +14,18 @@ class PromoCodeController extends Controller
     {
         // return Carbon::now()->format('m-d-Y');
         $promo = PromCode::where('code' , $request->promoCode)
-        ->get();
-
-        
-        // ->whereDate('end_date' , '>=' , Carbon::now())->first();
-        // if($promo) {
-        //     if($promo->user_id != Auth::guard('sanctum')->user()->id){
-        //         $promo->user_id = Auth::guard('sanctum')->user()->id;
-        //         $promo->save();
+        ->whereDate('end_date' , '>=' , Carbon::now())->first();
+        if($promo) {
+            if($promo->user_id != Auth::guard('sanctum')->user()->id){
+                $promo->user_id = Auth::guard('sanctum')->user()->id;
+                $promo->save();
               return response()->json(['price' => (float)$promo->price , 'status' => true]);
-        //     } else {
-            //   return  response()->json(['message' => 'Promo Code Allready used' , 'status' => false]);
-        //     }
+            } else {
+              return  response()->json(['message' => 'Promo Code Allready used' , 'status' => false]);
+            }
 
-        // } else {
-        //     return  response()->json(['message' => 'Promo Code Expire' , 'status' => false]);
-        // }
+        } else {
+            return  response()->json(['message' => 'Promo Code Expire' , 'status' => false]);
+        }
     }
 }

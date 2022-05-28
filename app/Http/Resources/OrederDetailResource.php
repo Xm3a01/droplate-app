@@ -19,10 +19,10 @@ class OrederDetailResource extends JsonResource
             'order_id' => $this->order_id,
             'product_id' => $this->product_id,
             'quantity' => (int)$this->quantity,
-            'selling_price' => (float)$this->selling_price,
-            'purchasing_price' => (float)$this->purchasing_price,
-            'vat' => (float)$this->vat,
-            'wholesale_price' => (float)$this->wholesale_price,
+            'selling_price' => $this->selling_price,
+            'purchasing_price' => $this->purchasing_price,
+            'discount' => $this->discount,
+            'wholesale_price' => $this->wholesale_price,
             'product' => new ProductResource($this->product)
         ];
     }

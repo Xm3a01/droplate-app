@@ -107,7 +107,7 @@
                             class="form-control form-control-sm"
                             id=""
                             placeholder="Enter Discount"
-                            required
+                            value="0"
                           />
                         </div>
                       </div>

@@ -21,10 +21,7 @@
                   </h3>
                 </div>
                 <div class="col-md-1">
-                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                        data-target="#modal-lg">
-                        <i class="fa fa-plus"></i> New
-                    </button>
+                 
                 </div>
               </div>
             </div>
@@ -37,9 +34,12 @@
                     <div class="card-body">
                       <h5 class="card-title">Slide {{ $key + 1 }}</h5>
                       <p class="card-text">{{ $ad->link }}</p>
-                      <a href="" onclick="enEditSlid({{ $ad->id }} , event)" id="en-edit-btn-{{ $ad->id }}" class="btn btn-primary btn-xs">edit</a>
-                      <a href="" style="display: none" onclick="enCanecl({{ $ad->id }} , event)" class="btn btn-info btn-xs" id="en-cancel-{{ $ad->id }}">Canecl</a>
-                      <a href="" onclick="enDeleteSlide({{ $ad->id }} , event)" class="btn btn-danger btn-xs">delete</a>
+                      <div class="row">
+                        <a href="" onclick="enEditSlid({{ $ad->id }} , event)" id="en-edit-btn-{{ $ad->id }}" class="btn btn-primary btn-xs">edit</a>
+                        <a href="" style="display: none" onclick="enCanecl({{ $ad->id }} , event)" class="btn btn-info btn-xs" id="en-cancel-{{ $ad->id }}">Canecl</a>
+                        <a href="" onclick="enDeleteSlide({{ $ad->id }} , event)" class="btn btn-danger btn-xs">delete</a>
+
+                      </div>
                     </div>
                     <form action="{{ route('ads.destroy' , $ad->id) }}" method="POST" id="en-delete-slide-{{ $ad->id }}">
                       @csrf
@@ -101,15 +101,15 @@
                       <h5 class="card-title">Slide {{ $key + 1 }}</h5>
                       <p class="card-text">{{ $ad->ar_link }}</p>
                       <div class="row">
-                        <div class="col-md-2">
+                        {{-- <div class="col-md-2"> --}}
                           <a href="" onclick="editSlid({{ $ad->id }} , event)" id="ar-edit-btn-{{ $ad->id }}" class="btn btn-primary btn-xs">edit</a>
-                        </div>
-                        <div class="col-md-2">
+                        {{-- </div> --}}
+                        {{-- <div class="col-md-6"> --}}
                           <a href="" style="display: none" onclick="arCanecl({{ $ad->id }} , event)" class="btn btn-info btn-xs" id="ar-cancel-{{ $ad->id }}">Canecl</a>
-                        </div>
-                        <div class="col-md-2">
+                        {{-- </div> --}}
+                        {{-- <div class="col-md-4"> --}}
                           <a href="" onclick="arDeleteSlide({{ $ad->id }} , event)" class="btn btn-danger btn-xs">delete</a>
-                        </div>
+                        {{-- </div> --}}
                       </div>
                     </div>
                     <form action="{{ route('ads.destroy' , $ad->id) }}" method="POST" id="ar-delete-slide-{{ $ad->id }}">
@@ -279,7 +279,7 @@
    function enCanecl(id , event){
       event.preventDefault();
      $('#en-edit-form-'+id).css('display' , 'none')
-     $('#en-edit-btn-'+id).css('display' , 'block')
+     $('#en-edit-btn-'+id).css('display' , 'inline-block')
      $('#en-cancel-'+id).css('display' , 'none')
     //  en-cancel
     // alert(id);

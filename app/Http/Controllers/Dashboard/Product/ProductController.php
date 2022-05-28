@@ -74,8 +74,8 @@ class ProductController extends Controller
 
         return view('app.product.edit',[
             'product' => $product,
-            'categories' => json_encode($categories),
-            'sub_categories' => json_encode($sub_categories)
+            'categories' => $categories,
+            'subCategories' => $sub_categories
         ]);
     }
 

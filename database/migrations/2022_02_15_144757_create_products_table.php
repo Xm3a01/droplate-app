@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->float('discount')->default(0);
             $table->float('wholesale_price')->nullable();
             $table->integer('quantity')->nullable();
+            $table->integer('condition')->default(0);
             $table->foreignId('category_id')->nullable()->constrained();
             $table->foreignId('sub_category_id')->nullable()->constrained();
             $table->timestamps();

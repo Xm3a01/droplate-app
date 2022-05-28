@@ -34,10 +34,11 @@ class OrderController extends Controller
         $user_id = Auth::guard('sanctum')->user()->id;
         $order['user_id'] = $user_id;
         $ordr = Order::create($order);
-
-        foreach ($order['order_details'] as $key => $order_detail) {
-            $order_detail['order_id'] = $ordr->id;
-            OrderDetail::create($order_detail);
+        foreach ($order['order_details'] as $key => $order_detail) { 
+            $ordr->orderDetails()->create($order_detail);
+            $product = Product::find($order_detail['product_id']);
+            $product->quantity -= $order_detail['quantity'];
+            $product->save();
         }
 
         // $this->order_wallet($user_id , $order->order_status);
@@ -52,7 +53,7 @@ class OrderController extends Controller
     }
 
     public function order_inProgress(){
-        $orders = Order::with('orderDetails')->where('order_status' , Order::INPROGRESS)->get();
+        $orders = Order::with('orderDetails')->where('order_status' , Order::ACTIVE)->get();
         return OrderResource::collection($orders);
     }
     public function order_canceled(){

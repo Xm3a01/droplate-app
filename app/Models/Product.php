@@ -28,6 +28,7 @@ class Product extends Model implements HasMedia
         'quantity',
         'category_id',
         'sub_category_id',
+        'condition'
     ];
 
     public function category()

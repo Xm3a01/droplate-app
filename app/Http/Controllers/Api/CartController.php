@@ -17,56 +17,62 @@ class CartController extends Controller
     {
         $carts = Cart::with('cartDetails.product')
               ->where('user_id' , Auth::guard('sanctum')->user()->id)->get();
+        // return $carts;
         return CartResource::collection($carts);
     }
     public function add(Request $request)
     {
         // return $request;
-        $cart = DB::transaction(function() use($request){
+        $product = Product::find( $request->product_id);
+        if(!is_null($product) && $product->quantity >= $request->quantity) {
+
+        $cart = DB::transaction(function() use($request , $product){
             $cart = Cart::where('user_id' , Auth::guard('sanctum')->user()->id)->first();
             if(is_null($cart)) {
-                $cart = Cart::create([
-                    'quantity' => $request->quantity,
-                    'total_price' => $request->price,
-                    'user_id' => Auth::guard('sanctum')->user()->id
-                ]);
-            }
-
-            $cartDetail = CartDetail::where('product_id' , $request->product_id)->first();
-            
-            if(is_null($cartDetail)) {
-                if($request->quantity >= 100) {
-                    $request['price'] = $request->wholesale_price;
-                }
-                $cart->cartDetails()->create([
-                    'quantity' => $request->quantity,
-                    'sub_total_price' => ($request->quantity * $request->price),
-                    'sub_total_purchasing_price' => ($request->quantity * $request->purchasing_price),
-                    'sub_total_discount' => ($request->quantity * $request->vat),
-                    'sub_total_wholesale_price' => ($request->quantity * $request->wholesale_price),
-                    'price' => $request->price,
-                    'purchasing_price' => $request->purchasing_price,
-                    'vat' => $request->vat,
-                    'wholesale_price' => $request->wholesale_price,
-                    'product_id' => $request->product_id,
-                ]);
+                $cart = new Cart();
+                $cart->quantity = $request->quantity;
+                $cart->total_price = $request->quantity > 100
+                    ? $product->wholesale_price
+                    : $request->price;
+                $cart->user_id = Auth::guard('sanctum')->user()->id;
+                $cart->save();
             } else {
-                if($cartDetail->quantity >= 100) {
-                    $request['price'] = $request->wholesale_price;
-                    $cartDetail->sub_total_price = $cartDetail->sub_total_wholesale_price;
-                }
-                $cartDetail->quantity += $request->quantity;
-                $cartDetail->sub_total_price += ($request->quantity * $request->price);
-                $cartDetail->sub_total_purchasing_price += $request->purchasing_price;
-                $cartDetail->sub_total_wholesale_price += $request->wholesale_price;
-                $cartDetail->sub_total_vat += ($request->quantity * $request->vat);
-                $cartDetail->save();
+                $cart->quantity += $request->quantity;
+                $cart->total_price += $request->quantity > 100
+                    ? $request->wholesale_price
+                    : $request->price;
+                $cart->save();
             }
 
+            
+           
+                $cartDetails = new CartDetail();
+                $cartDetails->quantity = $request->quantity;
+                $cartDetails->sub_total_price = $request->quantity > 100
+                ? ($request->quantity * $request->wholesale_price)
+                : ($request->quantity * $request->price);
+                
+                $cartDetails->sub_total_purchasing_price = ($request->quantity * $request->purchasing_price);
+                $cartDetails->sub_total_discount = ($request->quantity * $request->discount);
+                $cartDetails->sub_total_wholesale_price = ($request->quantity * $request->wholesale_price);
+                $cartDetails->price = $request->quantity > 100
+                ? $request->wholesale_price
+                : $request->price;
+                $cartDetails->purchasing_price = $request->purchasing_price;
+                // $cartDetails->vat = $request->vat;
+                $cartDetails->wholesale_price = $request->wholesale_price;
+                $cartDetails->product_id = $request->product_id;
+                $cartDetails->cart_id = $cart->id;
+                $cartDetails->save();
+            
+
+// dd($cartDetail);
             return $cart;
         });
-
         return response()->json(['message' => "Product Add To Cart Successfully" , 'status' => true]);
+      }
+
+        return response()->json(['message' => "Product Not Found Or Quantity is not available" , 'status' => false]);
     }
 
     public function remove($id)

@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth:admin'],function () {
     Route::get('delivery/price', [ReportController::class, 'deliveryReport'])->name('delivery.price');
     Route::get('setting', [SettingController::class , 'index'])->name('setting.index');
     Route::post('setting', [SettingController::class , 'update'])->name('setting.update');
+    Route::get('conditions', [SettingController::class , 'condition'])->name('conditions.index');
+    Route::post('conditions', [SettingController::class , 'condition_store'])->name('conditions.update');
 });
 
 Route::group(['prefix' => 'data-table' , 'middleware' => 'auth:admin'],function(){

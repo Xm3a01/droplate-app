@@ -22,7 +22,7 @@ class OrderResource extends JsonResource
             'order_status' => $this->order_status,
             // 'total_price' => $this->total_price,
             'delivery_price' => (float)$this->delivery_price,
-            'total_vat' =>(float) $this->total_vat,
+            'total_discount' =>(float) $this->total_discount,
             'total_purchasing_price' => (float)$this->total_purchasing_price,
             'total_selling_price' => (float)$this->total_selling_price,
             'total_wholesale_price' => (float)$this->total_wholesale_price,

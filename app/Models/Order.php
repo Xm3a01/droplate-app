@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     public const DONE = 1;
-    public const INPROGRESS = 2;
+    public const ACTIVE = 2;
     public const CANCEL = 0;
     // public const DONE = 1;
 

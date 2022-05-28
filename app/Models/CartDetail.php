@@ -18,10 +18,12 @@ class CartDetail extends Model
         'wholesale_price',
         'price',
         'sub_total_purchasing_price',
+        'sub_total_discount',
         'sub_total_vat',
         'sub_total_wholesale_price',
         'cart_id',
         'product_id',
+        'discount'
     ];
 
     public function cart()

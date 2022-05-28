@@ -18,7 +18,7 @@ class CartResource extends JsonResource
             'total_price' => (float)$this->cartDetails()->sum('sub_total_price'),
             'quantity' => (int)$this->cartDetails()->sum('quantity'),
             'sub_total_purchasing_price' => (float)$this->cartDetails()->sum('sub_total_purchasing_price'),
-            'sub_total_vat' => (float)$this->cartDetails()->sum('sub_total_vat'),
+            'sub_total_discount' => (float)$this->cartDetails()->sum('sub_total_discount'),
             'sub_total_wholesale_price' => (float)$this->cartDetails()->sum('sub_total_wholesale_price'),
             'products' => CartDetailResource::collection($this->cartDetails)
 

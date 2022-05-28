@@ -30,7 +30,8 @@ class User extends Authenticatable implements HasMedia
         'address',
         'gender',
         'age',
-        'is_block'
+        'is_block',
+        'social_id'
     ];
 
     /**

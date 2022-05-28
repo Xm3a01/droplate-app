@@ -245,6 +245,17 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item {{ Request::is('*conditions*') ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="{{ route('conditions.index') }}" class="nav-link {{ Request::is('*conditions*') ? 'active' : '' }}">
+                        <i class=" nav-icon  fa fa-cog"></i>
+                        <p>
+                            Conditions&Privacy
+                        </p>
+                    </a>
+                </li>
+
+               
             </ul>
             </li>
             </ul>

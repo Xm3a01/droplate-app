@@ -68,6 +68,6 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
-        'optional' => \App\Http\Middleware\NoAuth::class,
+        'optional_auth' => \App\Http\Middleware\NoAuth::class,
     ];
 }

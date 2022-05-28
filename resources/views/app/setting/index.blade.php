@@ -42,7 +42,7 @@
                                        <label for="">Vat</label>
                                    </div>
                                    <div class="col-md-11">
-                                       <input type="text" value="{{ $setting->vat }}" :disabled = "vatFlag == 0"  placeholder="Vat" name="vat" class="form-control form-control-sm">
+                                       <input type="text" value="{{ $setting->vat ?? 0 }}" :disabled = "vatFlag == 0"  placeholder="Vat" name="vat" class="form-control form-control-sm" required>
                                    </div>
 
                                </div>
@@ -52,7 +52,7 @@
                                     <label for="">Points</label>
                                 </div>
                                 <div class="col-md-11">
-                                    <input type="text" value="{{ $setting->points }}" :disabled = "vatFlag == 0"  placeholder="Points" name="points" class="form-control form-control-sm">
+                                    <input type="text" value="{{ $setting->points ?? 0 }}" :disabled = "vatFlag == 0"  placeholder="Points" name="points" class="form-control form-control-sm" required>
                                 </div>
 
                                </div>
