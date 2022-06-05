@@ -87,15 +87,16 @@ Route::group(['prefix' => 'data-table' , 'middleware' => 'auth:admin'],function(
 
 
 Route::get('test' , function(){
+    return view('test');
     // return "hello";
     // return Sms::send('Hello' , '09123456');
         // return "hello";
         // return Sms::send('Hello' , '09123456');
         // php artisan storage:link
         
-        $artisan = Artisan::call('storage:link');
-        $output = Artisan::output();
-        return $output;
+        // $artisan = Artisan::call('storage:link');
+        // $output = Artisan::output();
+        // return $output;
 
 });
 // Category::whereJsonContains('name->en' , 'En-Quinten Kihn')->get();

@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Api\Ads\AdsController;
 use App\Http\Controllers\Api\Otp\OtpController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ComplaintController;
 use App\Http\Controllers\Api\ConditionController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Favorite\FavoriteController;
 use App\Http\Controllers\Api\PromoCode\PromoCodeController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Models\PromCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,7 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
     Route::get('orders' , [OrderController::class , 'index'])->name('order.indx');
     Route::post('orders/status/{order}' , [OrderController::class , 'order_status'])->name('orders.status');
     Route::post('orders' , [OrderController::class , 'store']);
+    Route::post('add/complaint' , [ComplaintController::class , 'store']);
     Route::post('logout' , [LoginController::class ,'apiLogout'])->name('logout');
    });
 
@@ -101,5 +104,9 @@ Route::group(['prefix'=>'carts' , 'middleware' => 'auth:sanctum'] , function() {
 });
 
 Route::get('ads' , [AdsController::class ,'index'])->name('ads');
+
+Route::get('test' , function(){
+    return PromCode::all();
+});
 
 
