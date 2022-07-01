@@ -104,10 +104,10 @@ trait DataTableTrait
                 return $category->created_at->format('d M ,y h:i A');
             })
             ->addColumn('ar_name', function ($category) {
-                return $category->getTranslation('name', 'ar');
+                return $category->name ? $category->getTranslation('name', 'ar') : "";
             })
             ->addColumn('name', function ($category) {
-                return $category->getTranslation('name', 'en');
+                return $category->name ? $category->getTranslation('name', 'en') : "";
             })
             ->make(true);
     }
@@ -138,16 +138,16 @@ trait DataTableTrait
                 return $sub_category->created_at->format('d M ,y h:i A');
             })
             ->addColumn('ar_name', function ($sub_category) {
-                return $sub_category->getTranslation('name', 'ar');
+                return $sub_category->name ? $sub_category->getTranslation('name', 'ar') : "";
             })
             ->addColumn('name', function ($sub_category) {
-                return $sub_category->getTranslation('name', 'en');
+                return  $sub_category->name ? $sub_category->getTranslation('name', 'en') : "";
             })
             ->addColumn('category', function ($sub_category) {
-                return $sub_category->category->getTranslation('name', 'en');
+                return $sub_category->category ? $sub_category->category->getTranslation('name', 'en') : "";
             })
             ->addColumn('ar_category', function ($sub_category) {
-                return $sub_category->category->getTranslation('name', 'ar');
+                return $sub_category->category ? $sub_category->category->getTranslation('name', 'ar') : "";
             })
 
             ->make(true);
@@ -232,7 +232,7 @@ trait DataTableTrait
 
     public function cityDataTable($request)
     {
-        $cities  = City::with('region')->select('*');
+        $cities  = City::with('regions')->select('*');
 
         return Datatables::of($cities)
 
@@ -246,17 +246,12 @@ trait DataTableTrait
             })
 
             ->addColumn('name', function ($city) {
-                return $city->getTranslation('name' , 'en');
+                return $city->name ? $city->getTranslation('name' , 'en') : "";
             })
             ->addColumn('ar_name', function ($city) {
-                return $city->getTranslation('name' , 'ar');
+                return $city->name ? $city->getTranslation('name' , 'ar') : "";
             })
-            ->addColumn('re_ar_name', function ($city) {
-                return $city->region->getTranslation('name' , 'ar');
-            })
-            ->addColumn('re_en_name', function ($city) {
-                return $city->region->getTranslation('name' , 'en');
-            })
+            
             ->addColumn('queck', function ($city) {
                 return $city->regular_delivery_price;
             })
@@ -282,7 +277,7 @@ trait DataTableTrait
 
     public function regionDataTable($request)
     {
-        $regions  = Region::select('*');
+        $regions  = Region::with('city')->select('*');
 
         return Datatables::of($regions)
 
@@ -296,10 +291,17 @@ trait DataTableTrait
             })
 
             ->addColumn('ar_name', function ($region) {
-                return $region->getTranslation('name' , 'ar');
+                return $region->name ? $region->getTranslation('name' , 'ar') : "";
             })
             ->addColumn('name', function ($region) {
-                return $region->getTranslation('name' , 'en');
+                return $region->name ? $region->getTranslation('name' , 'en') : "";
+            })
+
+            ->addColumn('city_ar_name', function ($region) {
+                return $region->city->name ? $region->city->getTranslation('name' , 'ar') : "";
+            })
+            ->addColumn('city_en_name', function ($region) {
+                return $region->city->name ? $region->city->getTranslation('name' , 'en') : "";
             })
 
             ->addColumn('queck', function ($region) {
@@ -366,6 +368,52 @@ trait DataTableTrait
                   </div>';
             })
 
+
+        ->make(true);
+    }
+
+
+    public function driverDataTable($request)
+    {
+        $drivers  = Admin::with(['city' , 'region'])->role('Driver');
+
+        return Datatables::of($drivers)
+
+            ->filter(function ($instance) use ($request) {
+
+                if ($request->item != '') {
+                    $instance->where('name', 'like', "%{$request->get('item')}%")
+                   ;
+                }
+
+                // if ($request->item != '') {
+                //     $instance->where('is_admin' , 0)->where('email', 'like', "%{$request->get('item')}%");
+                // }
+            })
+            ->addColumn('city', function ($driver) {
+                return $driver->city ? $driver->city->getTranslation('name' , 'en') : "";
+            })
+            ->addColumn('region', function ($driver) {
+                return $driver->region ? $driver->region->getTranslation('name' , 'en') : "";
+
+            })
+
+            ->addColumn('busy', function ($driver) {
+                return $driver->busy == 0 ? "No" : "Yes";
+
+            })
+
+            
+
+            ->addColumn('action', function ($employee) {
+
+                return '<div class="row">
+                    <div class="col-md-3"><a class="btn btn-primary btn-xs" href="' . route('employees.edit', $employee->id) . '"><i class ="fa fa-pen"></i></a></div>
+                    <div class="col-md-3"><a class="btn btn-danger btn-xs" data-url = "' . route('employees.destroy', $employee->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
+                  </div>';
+            })
+
+            
 
         ->make(true);
     }
@@ -442,6 +490,22 @@ trait DataTableTrait
                     break;
                 }
             })
+            ->addColumn('order_progress', function ($order) {
+
+                return '<div class="row">
+                   <div class = "col-md-12 mb-2" >'.$order->progress.'</div>
+                   <div class = "col-md-12" >
+                   <select required class="form-control form-control-sm" id = "progress" data-update = "'.route('orders.update' , $order->id).'"  style="width: 100%">
+                        <option selected="selected" value="">-- Select -- </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                </select>
+                </div>
+                  </div>';
+            })
             ->addColumn('action', function ($order) {
                 return '<div class="row">
                     <div class="col-md-1 mr-2"><a class="btn btn-primary btn-xs" href="' . route('orders.show', $order->id) . '"><i class ="fa fa-info"></i></a></div>
@@ -449,7 +513,7 @@ trait DataTableTrait
                   </div>';
             })
           
-
+            ->rawColumns(['order_progress' , 'action'])
 
         ->make(true);
     }

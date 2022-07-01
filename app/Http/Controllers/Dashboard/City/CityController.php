@@ -13,13 +13,16 @@ class CityController extends Controller
     
     public function index()
     {
-        $regions = Region::all();
-        return view('app.city.index' , ['regions' => $regions]);
+        return view('app.city.index');
     }
 
     
     public function store(Request $request)
     {
+        $this->validate($request , [
+            'regular_delivery_price' => 'numeric',
+            'fast_delivery_price' => 'numeric'
+        ]);
         City::create([
             'name' => [
                 'ar' => $request->city_ar_name,
@@ -27,7 +30,6 @@ class CityController extends Controller
                  ],
             'regular_delivery_price' => $request->regular_delivery_price,
             'fast_delivery_price' => $request->fast_delivery_price,
-            'region_id' => $request->region_id
         ]);
 
         Session::flash('success' , 'City Add Successfylly');
@@ -53,7 +55,6 @@ class CityController extends Controller
             ],
             'regular_delivery_price' => $request->regular_delivery_price,
             'fast_delivery_price' => $request->fast_delivery_price,
-            'region_id' => $request->region_id
         ]);
 
         Session::flash('success' , 'City update Successfylly');

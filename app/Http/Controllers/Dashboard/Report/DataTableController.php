@@ -60,4 +60,9 @@ class DataTableController extends Controller
     {
         return $this->orderDataTable($request);
     }
+
+    public function driver(Request $request)
+    {
+        return $this->driverDataTable($request);
+    }
 }

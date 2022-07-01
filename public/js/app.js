@@ -22315,7 +22315,7 @@ var render = function () {
           },
           [
             _c("option", { attrs: { selected: "selected", value: "" } }, [
-              _vm._v(_vm._s(_vm.title_1)),
+              _vm._v("-- Select --"),
             ]),
             _vm._v(" "),
             _vm._l(_vm.items_info, function (item) {
@@ -22372,12 +22372,12 @@ var render = function () {
           },
           [
             _c("option", { attrs: { selected: "selected", value: "" } }, [
-              _vm._v(_vm._s(_vm.title_2)),
+              _vm._v("-- Select --"),
             ]),
             _vm._v(" "),
             _vm._l(
               _vm.sub_item == "cities"
-                ? _vm.item_first_Selected.cities
+                ? _vm.item_first_Selected.regions
                 : _vm.item_first_Selected.sub_categories,
               function (item_2) {
                 return _c(

@@ -2,10 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Setting;
+use App\Traits\SettingTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
 {
+    use SettingTrait;
     /**
      * Transform the resource into an array.
      *
@@ -20,7 +23,7 @@ class OrderResource extends JsonResource
             'client_phone' => $this->client_phone,
             'address' => $this->address,
             'order_status' => $this->order_status,
-            // 'total_price' => $this->total_price,
+            'vat' =>   $this->vat(),
             'delivery_price' => (float)$this->delivery_price,
             'total_discount' =>(float) $this->total_discount,
             'total_purchasing_price' => (float)$this->total_purchasing_price,

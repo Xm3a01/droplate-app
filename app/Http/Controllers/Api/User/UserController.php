@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\Helper\Sms;
 use App\Models\User;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
@@ -80,6 +81,7 @@ class UserController extends Controller
             if($otp->status == true) {
                 // Session
                 $text = "Your Otp code is : " .$otp->code; // do message 
+                Sms::send($text , $user->phone);
             } 
 
             return $otp;

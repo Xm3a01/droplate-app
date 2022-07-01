@@ -11,22 +11,25 @@ class CityController extends Controller
 {
     public function index()
     {
-        $cities  = City::with('region')->get();
+        $cities  = City::with('regions')->get();
+
         return CityResource::collection($cities);
     }
 
 
     public function show(City $city)
     {
-        $city->with('region')->get();
+        $city->with('regions')->get();
         return new CityResource($city);
     }
 
     public function filter(Request $request)
     {
-        $cities = City::with('region')->whereJsonContains('name->en' , $request->name)
-                 ->orWhereJsonContains('name->en' , $request->name)->get();
-
-        return CityResource::collection($cities);
+        $city = City::with('regions')->find($request->id);
+        if(!is_null($city)) {
+            return new CityResource($city);
+        } else {
+            return [];
+        }
     }
 }

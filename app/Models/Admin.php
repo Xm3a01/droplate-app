@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\City;
+use App\Models\Order;
 use App\Models\Region;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -17,6 +18,12 @@ class Admin extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, HasFactory, Notifiable , HasRoles;
 
     protected $guard = 'admin';
+
+
+    public const BUSY = 1;
+    public const NOTBUSY = 0;
+
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -31,6 +38,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
         'address',
         'region_id',
         'city_id',
+        'busy'
     ];
 
     /**
@@ -59,5 +67,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

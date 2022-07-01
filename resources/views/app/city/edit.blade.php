@@ -15,19 +15,7 @@
                     @csrf
                     @method('PUT')
                     <div class="form-body p-5">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="">Region</label>
-                                <select type="text" placeholder="Region" name="region_id" id=""
-                                    class="form-control form-control-sm" autocomplete="" required>
-                                    <option value="">Region</option>
-                                    @foreach ($regions as $region)
-                                        <option {{ $region->id == $city->region_id ? 'selected' : '' }} value="{{ $region->id }}">{{ $region->name }}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                        </div>
+                        
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label for="">City name</label>

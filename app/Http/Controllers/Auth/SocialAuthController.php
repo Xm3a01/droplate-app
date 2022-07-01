@@ -21,14 +21,14 @@ class SocialAuthController extends Controller
     public function login(Request $request)
     {
 
-        // return $request->password;
-        $request->validate([
-           'social_id' => 'required',
+
+        $this->validate($request , [
+            'social_id' => ['required'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
         ]);
      
         $user = User::where('social_id', $request->social_id)->first();
-     
-        // return !Hash::check($request->password , $user->password);
+
         if ($user->social_id != $request->social_id) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect or user blocked.'],

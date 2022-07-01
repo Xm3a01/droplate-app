@@ -41,6 +41,7 @@
             {data: 'order_status',name: 'order_status'},
             {data: 'address',name: 'address'},
             {data: 'quantity',name: 'quantity'},
+            {data: 'order_progress',name: 'order_progress'},
             {data: 'action', name: 'action'},
             // Recived
           ],
@@ -85,6 +86,45 @@
                 });
             } else {
                 swal("Your order is safe!");
+            }
+        })
+      })
+
+      $('#loading-table').on('change', '.form-control[data-update]', function(e) {
+             console.log(this.value);
+            e.preventDefault();
+            table.draw(false);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            var url = $(this).data('update');
+            swal({
+                title: "Are you sure?",
+                text: "Once Change, your order progress change!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {
+                        method: '_PUT',
+                        submit: true,
+                        progress: this.value
+                    }
+                }).always(function(data) {
+                    table.draw(false);
+                    swal("Poof! Your Progress has Move on", {
+                        icon: "success",
+                    });
+                });
+            } else {
+                swal("Your Progess still here");
             }
         })
       })

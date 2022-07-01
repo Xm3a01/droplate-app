@@ -26,4 +26,11 @@ class Cart extends Model
     {
         return $this->hasMany(CartDetail::class);
     }
+
+    // public function getTotalPriceAtribute()
+    // {
+    //     return $this->cartDetails();
+    // }
+
+
 }

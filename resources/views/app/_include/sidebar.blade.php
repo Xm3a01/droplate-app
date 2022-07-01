@@ -43,6 +43,13 @@
                                 <p class="">Employees</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('drivers.index') }}"
+                                class="nav-link {{ Request::is('*drivers') ? 'tabed' : '' }}">
+                                <i class="nav-icon text-sm fa fa-users"></i>
+                                <p class="">Driver</p>
+                            </a>
+                        </li>   
                         @endrole
                        
                         <li class="nav-item">
@@ -121,19 +128,20 @@
                     </a>
                     <ul class="nav nav-treeview text-xs">
                         <li class="nav-item">
-                            <a href="{{ route('regions.index') }}"
-                                class="nav-link {{ Route::is('regions.index') ? 'tabed' : '' }}">
-                                <i class="nav-icon text-sm fa fa-map"></i>
-                                <p class="">Regions</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('cities.index') }}"
                                 class="nav-link {{ Route::is('cities.index') ? 'tabed' : '' }}">
                                 <i class="nav-icon text-sm fa fa-city"></i>
                                 <p class="">cities</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('regions.index') }}"
+                                class="nav-link {{ Route::is('regions.index') ? 'tabed' : '' }}">
+                                <i class="nav-icon text-sm fa fa-map"></i>
+                                <p class="">Regions</p>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </li>
 
@@ -245,7 +253,14 @@
                         </p>
                     </a>
                 </li>
-
+                 <li class="nav-item {{ Route::is('notifications.create') ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="{{ route('notifications.create') }}" class="nav-link {{ Route::is('notifications.create') ? 'active' : '' }}">
+                        <i class=" nav-icon  fa fa-bile"></i>
+                        <p>
+                            Notifications
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item {{ Request::is('*conditions*') ? 'menu-is-opening menu-open' : '' }}">
                     <a href="{{ route('conditions.index') }}" class="nav-link {{ Request::is('*conditions*') ? 'active' : '' }}">
                         <i class=" nav-icon  fa fa-cog"></i>

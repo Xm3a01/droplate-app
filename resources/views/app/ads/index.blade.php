@@ -25,6 +25,7 @@
                 </div>
               </div>
             </div>
+            
             <div class="p-5">
               <div class="row">
                 @foreach ($en_ads  as $key => $ad)

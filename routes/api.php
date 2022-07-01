@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PromCode;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
@@ -13,16 +14,18 @@ use App\Http\Controllers\Api\Otp\OtpController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ComplaintController;
 use App\Http\Controllers\Api\ConditionController;
+use App\Http\Controllers\Api\DriverController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Api\SubCategoryController;
+use App\Http\Controllers\Auth\DriverAuthController;
+use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\Product\OrderController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Favorite\FavoriteController;
 use App\Http\Controllers\Api\PromoCode\PromoCodeController;
-use App\Http\Controllers\Auth\SocialAuthController;
-use App\Models\PromCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +45,8 @@ Route::group(['middleware' => 'optional_auth'] , function() {
     Route::get('brands' , [CategoryController::class ,'brand'])->name('brand');
     Route::get('categories' , [CategoryController::class ,'index'])->name('categories.index');
     Route::get('categories/{category}' , [CategoryController::class ,'show'])->name('categories.show');
-    Route::get('best/brands' , [SubCategoryController::class , 'bestBrand'])->name('favorites.index');
-    Route::get('sub_categories' , [SubCategoryController::class ,'index'])->name('best.brands');
+    Route::get('best/brands' , [SubCategoryController::class , 'bestBrand'])->name('best.brands');
+    Route::get('sub_categories' , [SubCategoryController::class ,'index'])->name('sub_categories');
     Route::get('sub_categories/{sub_category}' , [SubCategoryController::class ,'show'])->name('sub_categories.show');
     Route::get('regions' , [RegionController::class ,'index'])->name('regions.index');
     Route::get('regions/{region}' , [RegionController::class ,'show'])->name('regions.show');
@@ -59,6 +62,7 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
     Route::put('change/password/{user}' , [UserController::class , 'change_password'])->name('change.password');
     
     Route::get('favorites' , [FavoriteController::class , 'index'])->name('favorites.index');
+    Route::get('notify' , [NotificationController::class , 'index'])->name('notify');
     Route::get('promoCode' , [PromoCodeController::class , 'getPromo'])->name('promo.code');
     Route::post('add/to/favorites/{product}' , [FavoriteController::class , 'add_to_favorite'])->name('add.favorite');
     Route::post('review/create/{product}' , [ReviewController::class , 'add_review'])->name('reviews.create');
@@ -69,6 +73,7 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
     Route::get('orders/cancel' , [OrderController::class , 'order_canceled'])->name('order_canceled');
     Route::get('orders' , [OrderController::class , 'index'])->name('order.indx');
     Route::post('orders/status/{order}' , [OrderController::class , 'order_status'])->name('orders.status');
+    Route::post('orders/payed/{order}' , [OrderController::class , 'order_payed']);
     Route::post('orders' , [OrderController::class , 'store']);
     Route::post('add/complaint' , [ComplaintController::class , 'store']);
     Route::post('logout' , [LoginController::class ,'apiLogout'])->name('logout');
@@ -85,6 +90,11 @@ Route::group(['middleware' => 'guest:sanctum'] , function() {
     
     Route::post('social/register' , [SocialAuthController::class , 'create'])->name('social.register');
     Route::post('social/login' , [SocialAuthController::class , 'login'])->name('social.login');
+    
+    Route::post('driver/register' , [DriverAuthController::class , 'create'])->name('social.register');
+    Route::post('driver/login' , [DriverAuthController::class , 'login'])->name('social.login');
+
+    
 });
 
 Route::group(['prefix'=>'filter' , 'middleware' => 'optional_auth'] , function() {
@@ -99,14 +109,21 @@ Route::group(['prefix'=>'filter' , 'middleware' => 'optional_auth'] , function()
 Route::group(['prefix'=>'carts' , 'middleware' => 'auth:sanctum'] , function() {
     Route::get('/' , [CartController::class ,'index'])->name('carts.index');
     Route::post('add' , [CartController::class ,'add'])->name('carts.add');
+    Route::put('update/{id}' , [CartController::class ,'update'])->name('carts.update');
     Route::get('remove/{id}' , [CartController::class ,'remove'])->name('carts.remove');
     Route::get('clear' , [CartController::class ,'clear'])->name('carts.remove');
 });
 
 Route::get('ads' , [AdsController::class ,'index'])->name('ads');
 
+Route::group(['prefix'=>'driver' , 'middleware' => 'auth:sanctum'] , function() {
+    Route::get('notify' , [DriverController::class , 'index'])->name('notify');
+    Route::get('history' , [DriverController::class , 'history'])->name('history');
+    Route::get('orders' , [DriverController::class , 'order'])->name('order');
+    Route::post('confirm/{id}' , [DriverController::class , 'confirm'])->name('confirm');
+    Route::post('delivered/{id}' , [DriverController::class , 'delivered'])->name('delivered');  
+});
 Route::get('test' , function(){
     return PromCode::all();
 });
-
 

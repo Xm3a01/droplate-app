@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\RegionResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CityResource extends JsonResource
@@ -15,11 +16,12 @@ class CityResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'ar_name' => $this->getTranslation('name' , 'ar'),
             'en_name' => $this->getTranslation('name' , 'en'),
             'regular_delivery_price' => $this->regular_delivery_price,
             'fast_delivery_price' => $this->fast_delivery_price,
-            'region' => $this->region->name
+            'regions' => RegionResource::collection($this->regions)
         ];
     }
 }

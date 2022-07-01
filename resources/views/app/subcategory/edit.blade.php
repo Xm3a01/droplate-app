@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                               <label for="">Categories</label>
                              <select name="category_id" id="" class="form-control from-control-sm">
-                               <option value="">Categories</option>
+                               <option value="">--select--</option>
                                @foreach ($categories as $category)
                                    <option {{ $sub->category_id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                @endforeach

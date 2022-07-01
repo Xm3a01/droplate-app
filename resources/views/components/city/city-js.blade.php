@@ -26,8 +26,6 @@
         columns: [
             {data: 'name', name: 'name'},
             {data: 'ar_name', name: 'ar_name'},
-            {data: 're_ar_name', name: 're_ar_name'},
-            {data: 're_en_name', name: 're_en_name'},
             {data: 'queck', name: 'queck'},
             {data: 'normal', name: 'normal'},
             {data: 'date', name: 'date'},

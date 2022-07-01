@@ -42,6 +42,8 @@
                 <tr>
                     <th>Region Ar Name</th>
                     <th>Region  Name</th>
+                    <th>City Ar Name</th>
+                    <th>City  Name</th>
                     <th>Queck delivery  price</th>
                     <th>Normal delivery  price</th>
                     <th>Date</th>

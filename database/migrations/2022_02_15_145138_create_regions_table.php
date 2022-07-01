@@ -21,6 +21,7 @@ class CreateRegionsTable extends Migration
             $table->string('lang') -> nullable();
             $table->float('regular_delivery_price')->nullable();
             $table->float('fast_delivery_price')->nullable();
+            $table->foreignId('city_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

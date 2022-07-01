@@ -55,7 +55,23 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="form-body">
-                        <div class="row mt-2">
+
+                      <div class="row mt-2">
+                        <div class="col-md-12">
+                            <label for="">City</label>
+                            <select type="text" placeholder="Region" name="city_id" id=""
+                                class="form-control form-control-sm" autocomplete="" required>
+                                <option value="">Select--</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">
+                                        {{ $city->getTranslation('name' , 'ar') }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                    </div>
+                        <div class="row ">
                             <div class="col-md-6">
                                 <label for="">Region name</label>
                                 <input type="text" placeholder="Region name" name="en_name" id=""

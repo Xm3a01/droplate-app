@@ -15,6 +15,21 @@
                     @method('PUT')
                    <div class="form-body p-5">
                     <div class="row mt-2">
+                        <div class="col-md-12">
+                            <label for="">City</label>
+                            <select type="text" placeholder="Region" name="city_id" id=""
+                                class="form-control form-control-sm" autocomplete="" required>
+                                <option value="">Select--</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}" {{ $region->city_id == $city->id ? 'selected' : '' }}>
+                                        {{ $city->getTranslation('name' , 'ar') }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="row mt-2">
                         <div class="col-md-6">
                             <label for="">Region name</label>
                             <input type="text" placeholder="Region name" name="ar_name" id=""

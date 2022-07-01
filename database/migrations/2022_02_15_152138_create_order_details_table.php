@@ -21,7 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->float('vat')->nullable(); // when prodct ordered
             $table->float('wholesale_price')->nullable(); // when prodct ordered
             $table->integer('quantity');
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained();
             $table->timestamps();
         });

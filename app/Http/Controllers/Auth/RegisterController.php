@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helper\Sms;
 use App\Models\User;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
@@ -51,7 +52,8 @@ class RegisterController extends Controller
             $otp = Otp::generate($request->phone, 4, 1);
     
             if($otp->status == true) {
-                $text = "Your Otp code is : " .$otp->code; // do message 
+                $text = "Your Otp code is : $otp->code"; // do message 
+                Sms::send($text , $request->phone);
             } 
             return $otp;
 

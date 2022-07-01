@@ -82,6 +82,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->clearMediaCollection('users');
+        if(!is_null($user->orders)) {
+          
+        } 
         $user->delete();
 
     }

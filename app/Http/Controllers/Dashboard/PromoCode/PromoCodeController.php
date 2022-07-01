@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard\PromoCode;
 
+use App\Helper\Sms;
 use Carbon\Carbon;
 use App\Models\PromCode;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\Mobile;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Notification;
 
 class PromoCodeController extends Controller
 {
@@ -27,13 +31,19 @@ class PromoCodeController extends Controller
     
     public function store(Request $request)
     {
-        PromCode::create([
-            'code' => $request->price.'|'.Str::random(3),
+        $promo = PromCode::create([
+            'code' => $request->code,
             'price' => $request->price,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date
         ]);
+        Notification::send(User::all(), new Mobile($promo->code));
+        $users = User::whereNotNull('phone')->pluck('phone');
 
+        // return $users;
+        foreach($users as $user) {
+            Sms::send('promo code is : $promo->code' , $user);
+        }
         Session::flash('success' , 'Promo code Add Successfully');
         return redirect()->route('promoes.index');
     }
@@ -52,7 +62,7 @@ class PromoCodeController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date
         ]);
-
+        Notification::send(User::all(), new Mobile($promo->code));
         Session::flash('success' , 'Promo code update Successfully');
         return redirect()->route('promoes.index');
     }

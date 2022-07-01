@@ -20,12 +20,16 @@ class City extends Model
         'lang',
         'regular_delivery_price',
         'fast_delivery_price',
-        'region_id'
     ];
 
 
-    public function region()
+    public function regions()
     {
-        return $this->belongsTo(Region::class);
+        return $this->hasMany(Region::class);
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(Admin::class);
     }
 }

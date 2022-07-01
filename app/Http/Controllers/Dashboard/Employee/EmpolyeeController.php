@@ -18,14 +18,11 @@ class EmpolyeeController extends Controller
     public function index()
     {
 
-        // dd(Http::get('http://hash.m3awork.sd/api/free/products')->products);
-        // dd(Admin::role('Employee')->get());
-        $regions = Region::with('cities')->get();
+        $cities = City::with('regions')->get();
         $permissions = Permission::all();
-
-        
-        return view('app.employee.index' ,[
-            'regions' => json_encode($regions),
+       
+        return view('app.employee.index' , [
+            'cities' => json_encode($cities),
             'permissions' => $permissions
         ]);
     }

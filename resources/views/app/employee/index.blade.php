@@ -54,12 +54,12 @@
                     @csrf
                     <div class="form-body" id="app">
                       <input-select 
-                      items = "{{ $regions }}"
+                      items = "{{ $cities }}"
                       sub_item = "cities"
-                      title_1 = "Region"
-                      title_2 = "City"
-                      name_1 = "region_id"
-                      name_2 = "city_id"
+                      title_2 = "Region"
+                      title_1 = "City"
+                      name_2 = "region_id"
+                      name_1 = "city_id"
                       
                       > </input-select>
                 

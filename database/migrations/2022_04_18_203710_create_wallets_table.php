@@ -20,7 +20,7 @@ class CreateWalletsTable extends Migration
             $table->double('credit')->default(0);
             $table->double('debit')->default(0);
             $table->string('membership')->default('blue');
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

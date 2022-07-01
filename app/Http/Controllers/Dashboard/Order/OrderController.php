@@ -21,6 +21,16 @@ class OrderController extends Controller
         
     }
 
+
+    public function update(Request $request , Order $order)
+    {
+        if($request->has('progress')) {
+            $order->progress = $request->progress;
+        }
+
+        $order->save();
+    }
+
     public function destroy(Order $order)
     {
         $order->delete();

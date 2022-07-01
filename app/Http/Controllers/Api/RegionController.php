@@ -11,23 +11,26 @@ class RegionController extends Controller
 {
     public function index()
     {
-        $regions  = Region::with('cities')->get();
+        $regions  = Region::with('city')->get();
         return RegionResource::collection($regions);
     }
 
 
     public function show(Region $region)
     {
-        $region->with('cities')->get();
+        $region->with('city')->get();
         return new RegionResource($region);
     } 
 
 
     public function filter(Request $request)
     {
-        $regions = Region::with('cities')->whereJsonContains('name->en' , $request->name)
-                 ->orWhereJsonContains('name->en' , $request->name)->get();
-
-        return RegionResource::collection($regions);
+        $region = Region::with('city')->find($request->id);
+        // $region->load('city');
+        if(!is_null($region)) {
+            return new RegionResource($region);
+        } else {
+            return [];
+        }
     }
 }

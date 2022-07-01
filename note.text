@@ -1,0 +1,19 @@
+File Must Upload :
+Model :
+1- Admin
+2- Order
+
+Controller :
+1- Api/OrderController
+2- Api/DriverController
+2- Dashboard/PromoCodeController
+
+Resource:
+OrderNotificationResource
+
+Notification:
+OrderNotification
+
+Database All Schema:
+
+

@@ -25,6 +25,8 @@
         columns: [
             {data: 'name', name: 'name'},
             {data: 'ar_name', name: 'ar_name'},
+            {data: 'city_ar_name', name: 'city_ar_name'},
+            {data: 'city_en_name', name: 'city_en_name'},
             {data: 'queck', name: 'queck'},
             {data: 'normal', name: 'normal'},
             {data: 'date', name: 'date'},

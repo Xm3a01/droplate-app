@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Employee',
             'guard_name' => 'admin'
         ]);
+        Role::create([
+            'name' => 'Driver',
+            'guard_name' => 'admin'
+        ]);
 
         $admin = Admin::create([
             'name' => 'Admin',

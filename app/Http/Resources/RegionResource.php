@@ -15,9 +15,12 @@ class RegionResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'en_name' => $this->getTranslation('name' , 'en'),
             'ar_name' => $this->getTranslation('name' , 'ar'),
-            'cities' => CityResource::collection($this->cities)
+            'regular_delivery_price' => $this->regular_delivery_price,
+            'fast_delivery_price' => $this->fast_delivery_price,
+            // 'city' => new CityResource($this->city)
         ];
     }
 }

@@ -69,8 +69,8 @@
                                     
                                     <div class="col-md-6">
                                       <label for="">Categories</label>
-                                     <select name="category_id" id="" class="form-control from-control-sm">
-                                       <option value="">Categories</option>
+                                     <select name="category_id" id="" class="form-control from-control-sm" required>
+                                       <option value="">-- Select --</option>
                                        @foreach ($categories as $category)
                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                        @endforeach

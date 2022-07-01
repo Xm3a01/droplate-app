@@ -66,18 +66,23 @@ class SubCategoryController extends Controller
     public function update(SubCategoryRequest $request, SubCategory $sub_category)
     {
         if ($request->hasFile('image')) {
-            $sub_category->clearMediaCollection('subCategories');
-            $sub_category->addMediaFromRequest($request->image)
+            $sub_category->addMedia($request->image)
                 ->toMediaCollection('subCategories');
         }
 
+        if($request->has('ar_name') && $request->has('name')) {
         $sub_category->update([
             'name' => [
                 'ar' => $request->ar_name,
                 'en' => $request->name,
             ],
-            'category_id' => $request->category_id
         ]);
+       }
+
+        if($request->has('category_id')) {
+            $sub_category->category_id = $request->category_id;
+            $sub_category->save();
+        }
 
 
         Session::flash('success', 'Sub Category update Successfuly');

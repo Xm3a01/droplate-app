@@ -38,6 +38,7 @@
                     <th>Order Status</th>
                     <th>Address</th>
                     <th>Quantity</th>
+                    <th>Order Progress</th>
                     <th>Action</th>
                 </tr>
             </thead>

@@ -31,7 +31,8 @@ class User extends Authenticatable implements HasMedia
         'gender',
         'age',
         'is_block',
-        'social_id'
+        'social_id',
+        'device_token'
     ];
 
     /**
@@ -67,6 +68,11 @@ class User extends Authenticatable implements HasMedia
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function wallet()

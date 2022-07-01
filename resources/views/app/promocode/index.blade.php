@@ -55,7 +55,13 @@
                         @csrf
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <label for="">Promo Code</label>
+                                    <input type="text" placeholder="Promo Code" name="code" id=""
+                                        class="form-control form-control-sm" autocomplete="" required>
+                                </div>
+
+                                <div class="col-md-6">
                                     <label for="">Price</label>
                                     <input type="text" placeholder="Price" name="price" id=""
                                         class="form-control form-control-sm" autocomplete="" required>

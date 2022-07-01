@@ -18,7 +18,7 @@ class CreateComplaintsTable extends Migration
             $table->string('email')->nullable();
             $table->string('title')->nullable();
             $table->text('content')->nullable();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
