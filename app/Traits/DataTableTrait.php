@@ -491,17 +491,29 @@ trait DataTableTrait
                 }
             })
             ->addColumn('order_progress', function ($order) {
+                $progress = 'new Order';
 
+                switch ($order->progress) {
+                    case '2':
+                        $progress = 'Accepted By :'.$order->driver->name;
+                        break;
+                    case '3':
+                        $progress = 'Preparation in progress';
+                        break;
+                    case '4':
+                        $progress = 'Delivery in progress';
+                        break;                   
+                    case '5':
+                        $progress ='Delivered';
+                        break;
+                }
                 return '<div class="row">
-                   <div class = "col-md-12 mb-2" >'.$order->progress.'</div>
+                   <div class = "col-md-12 mb-2" >'.$progress.'</div>
                    <div class = "col-md-12" >
                    <select required class="form-control form-control-sm" id = "progress" data-update = "'.route('orders.update' , $order->id).'"  style="width: 100%">
                         <option selected="selected" value="">-- Select -- </option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="3">Preparation in progress</option>
+                        <option value="4">Delivery in progress</option>
                 </select>
                 </div>
                   </div>';

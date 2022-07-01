@@ -24,10 +24,9 @@ class SubCategoryController extends Controller
 
     public function filter(Request $request)
     {
-        $sub_categories = SubCategory::with('products')->whereJsonContains('name->en' , $request->name)
-                 ->orWhereJsonContains('name->en' , $request->name)->get();
+        $sub_category = SubCategory::with('products')->find($request->id);
 
-        return SubCategoryResource::collection($sub_categories);
+        return new SubCategoryResource($sub_category);
     }
 
 

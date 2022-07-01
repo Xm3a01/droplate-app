@@ -15,6 +15,7 @@ class SubCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->getTranslation('name' , 'en'),
             'ar_name' => $this->getTranslation('name' , 'ar'),
             'image' => $this->image,

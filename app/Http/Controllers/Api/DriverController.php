@@ -33,6 +33,7 @@ class DriverController extends Controller
 
         $order->driver_id =  $driver->id;
         $driver->busy =  Driver::BUSY;
+        $order->progress =  2;
         $order->save();
         $driver->save();
 
@@ -65,7 +66,10 @@ class DriverController extends Controller
         $driver = Driver::find(Auth::guard('sanctum')->user()->id);
         $order->order_status =  Order::DONE;
         $driver->busy = Driver::NOTBUSY;
+        $order->progress = 5;
         $driver->save();
         $order->save();
+
+        return response()->json(['message' => 'Order Done !' , 'status' => true]);
     }
 }

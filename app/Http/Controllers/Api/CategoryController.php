@@ -24,10 +24,9 @@ class CategoryController extends Controller
 
     public function filter(Request $request)
     {
-        $categories = Category::with('subCategories')->whereJsonContains('name->en' , $request->name)
-                 ->orWhereJsonContains('name->en' , $request->name)->get();
+        $category = Category::with('subCategories')->find($request->id);
 
-        return CategoryResource::collection($categories);
+        return new CategoryResource($category);
     }
 
     public function brand()

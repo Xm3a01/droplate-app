@@ -19,10 +19,11 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'user_id' => $this->user ? $this->user->name : '',
             'client_phone' => $this->client_phone,
             'address' => $this->address,
             'order_status' => $this->order_status,
+            'progress' => $this->progress,
             'vat' =>   $this->vat(),
             'delivery_price' => (float)$this->delivery_price,
             'total_discount' =>(float) $this->total_discount,
