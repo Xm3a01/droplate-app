@@ -7,10 +7,10 @@
             <!-- general form elements -->
             <div class="card card-dark">
                 <div class="card-header">
-                    <h3 class="card-title">Update Empolyee</h3>
+                    <h3 class="card-title">Update Driver</h3>
                 </div>
 
-                <form method="post" action="{{ route('employees.update' , $employee->id) }}" id="app" enctype="multipart/form-data">
+                <form method="post" action="{{ route('drivers.update' , $driver->id) }}" id="app" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-body p-5" >
@@ -25,9 +25,9 @@
                                 style="width: 100%"
                                 placeholder="Name"
                             >
-                            <option value="">Region</option>
+                            <option value="">--select --</option>
                             @foreach ($regions as $region)
-                                <option {{ $employee->region_id == $region->id ? 'selected' : '' }} value="{{ $region->id }}">{{ $region->name }}</option>
+                                <option {{ $driver->region_id == $region->id ? 'selected' : '' }} value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
                           </select>
                             </div>
@@ -39,9 +39,9 @@
                                 style="width: 100%"
                                 
                             >
-                            <option value="">Cities</option>
+                            <option value="">--Select--</option>
                             @foreach ($cities as $city)
-                                <option {{ $employee->city_id == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
+                                <option {{ $driver->city_id == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
                             @endforeach
                           </select>
                             </div>
@@ -57,7 +57,7 @@
                               class="form-control form-control-sm thingSelect"
                               style="width: 100%"
                               placeholder="Name"
-                              value="{{ $employee->name }}"
+                              value="{{ $driver->name }}"
                             />
                           </div>
                           <div class="col-md-6">
@@ -68,7 +68,7 @@
                               class="form-control form-control-sm"
                               style="width: 100%"
                               placeholder="E-mail"
-                              value="{{ $employee->email }}"
+                              value="{{ $driver->email }}"
                             />
                           </div>
                         </div>
@@ -100,30 +100,16 @@
                               class="form-control form-control-sm"
                               id=""
                               placeholder="Phone"
-                              value="{{ $employee->phone }}"
+                              value="{{ $driver->phone }}"
                             />
                           </div>
                         </div>
                         </div>
                       <div class="form-group">
                         <div class="row">
-                          <div class="col-md-6">
-                            <label for="exampleInputEmail1">Permissions / صلاحيات</label>
-                            <select
-                             
-                              name="permission_id"
-                              class="form-control form-control-sm"
-                              id="exampleInputEmail1"
-                             
-                            >
-                            <option value="">Permission</option>
-                            @foreach ($permissions as $permission)
-                                <option {{ $employee->hasPermissionTo($permission->name) ? 'selected' : ''}} value="{{ $permission->id }}">{{ $permission->name }}</option>
-                            @endforeach
-                          </select>
-                          </div>
+                          
                           <!-- purchasing_price -->
-                          <div class="col-md-6">
+                          <div class="col-md-12">
                             <label for="exampleInputEmail1">Address</label>
                             <input
                               type="text"
@@ -131,7 +117,7 @@
                               class="form-control form-control-sm"
                               id="exampleInputEmail1"
                               placeholder="Enter Address"
-                              value="{{ $employee->address }}"
+                              value="{{ $driver->address }}"
                             />
                           </div>
                          

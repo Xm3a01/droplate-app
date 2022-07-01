@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\City;
 use App\Models\Admin;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -39,5 +40,16 @@ class DriverController extends Controller
 
         Session::flash('Employee Add Successfylly');
         return redirect()->route('drivers.index');
+    }
+
+    public function edit(Admin $driver)
+    {
+        $cities = City::all();
+        $regions = Region::all();
+        return view('app.driver.edit' , [
+            'driver' => $driver,
+            'cities' => $cities,
+            'regions' => $regions,
+        ]);
     }
 }

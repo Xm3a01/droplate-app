@@ -126,4 +126,3 @@ Route::group(['prefix'=>'driver' , 'middleware' => 'auth:sanctum'] , function() 
 Route::get('test' , function(){
     return PromCode::all();
 });
-

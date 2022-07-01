@@ -408,8 +408,8 @@ trait DataTableTrait
             ->addColumn('action', function ($employee) {
 
                 return '<div class="row">
-                    <div class="col-md-3"><a class="btn btn-primary btn-xs" href="' . route('employees.edit', $employee->id) . '"><i class ="fa fa-pen"></i></a></div>
-                    <div class="col-md-3"><a class="btn btn-danger btn-xs" data-url = "' . route('employees.destroy', $employee->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
+                    <div class="col-md-3"><a class="btn btn-primary btn-xs" href="' . route('drivers.edit', $employee->id) . '"><i class ="fa fa-pen"></i></a></div>
+                    <div class="col-md-3"><a class="btn btn-danger btn-xs" data-url = "' . route('drivers.destroy', $employee->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
                   </div>';
             })
 

@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 @can('Manage-product')
-                <li class="nav-item {{ Request::is('*employees*') ? 'menu-is-opening menu-open' : '' }} ">
+                <li class="nav-item {{ Request::is('*employees*|*drivers*|*clients*') ? 'menu-is-opening menu-open' : '' }} ">
                     <a href="#" class="nav-link  {{ Request::is('*employees*') ? 'active' : '' }}">
                         {{-- <i class="nav-icon fa fa-road"></i> --}}
                         <i class="nav-icon fas fa-users"></i>
@@ -45,9 +45,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('drivers.index') }}"
-                                class="nav-link {{ Request::is('*drivers') ? 'tabed' : '' }}">
+                                class="nav-link {{ Request::is('*drivers*') ? 'tabed' : '' }}">
                                 <i class="nav-icon text-sm fa fa-users"></i>
-                                <p class="">Driver</p>
+                                <p class="">Drivers</p>
                             </a>
                         </li>   
                         @endrole
