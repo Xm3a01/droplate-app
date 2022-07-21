@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
-   
+
     use WalletTrait;
 
     public function index(Request $request)
@@ -29,16 +29,16 @@ class OrderController extends Controller
         return OrderResource::collection($orders);
     }
 
-    
+
     public function store(Request $request)
     {
-        
+
         // final code for order
         $order = $request->order;
         $user_id = Auth::guard('sanctum')->user()->id;
         $order['user_id'] = $user_id;
         $ordr = Order::create($order);
-        foreach ($order['order_details'] as $key => $order_detail) { 
+        foreach ($order['order_details'] as $key => $order_detail) {
             $ordr->orderDetails()->create($order_detail);
             $product = Product::find($order_detail['product_id']);
             $product->save();
@@ -46,10 +46,10 @@ class OrderController extends Controller
 
         $drivers = Admin::role('Driver')->where('region_id' , $order['region_id'])
                     ->where('city_id' , $order['city_id'])->where('busy',Admin::NOTBUSY)->get();
-           
+
         Notification::send($drivers , new OrderNotification($ordr));
 
-        return response()->json(['message' => 'Order save successfully' , 'status' => true]);
+        return response()->json(['id' => $ordr->id , 'message' => 'Order save successfully' , 'status' => true]);
 
     }
 
