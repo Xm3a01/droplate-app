@@ -12,6 +12,7 @@ class PromCode extends Model
     protected $fillable = [
         'price',
         'code',
+        'promoType',
         'start_date',
         'end_date'
     ];

@@ -8,16 +8,16 @@
             padding: 4px;
             box-shadow: 2px 3px 4px #b7b3b3c3;
         }
-        
+
     </style>
 @endpush
 @section('content')
    <div class="row justify-content-center" id="app">
-       <setting-page inline-template>  
+       <setting-page inline-template>
        <div class="col-md-8">
            <!-- general form elements -->
            <div class="card">
-               
+
                <div class="card-header">
                    <div class="row justify-content-between">
                            <div class="col-md-8">
@@ -56,6 +56,26 @@
                                 </div>
 
                                </div>
+
+                               {{-- <div class="form-group">
+                                <div class="col-md-1">
+                                 <label for="">PromoType</label>
+                             </div>
+                             <div class="col-md-11">
+                                {{-- <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="radio" value="1" {{ $setting->promoType == 1 ? 'checked' : ''}} :disabled = "vatFlag == 0" name="promoType" required>
+                                        Percentage
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <input type="radio" value="0"  {{ $setting->promoType == 0 ? 'checked' : ''}} :disabled = "vatFlag == 0" name="promoType" required>
+                                        Price
+                                    </div>
+                                </div> -
+
+                             </div>
+
+                            </div> --}}
                            </div>
 
                        </div>

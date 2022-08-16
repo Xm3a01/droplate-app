@@ -78,6 +78,20 @@
                                         class="form-control form-control" required>
                                 </div>
 
+                                <div class="col-md-6 mt-2">
+                                    <label for="">Promo Type</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="radio" value="1" :disabled = "vatFlag == 0" name="promoType" required>
+                                            <label for="">Percentage</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="radio" value="0"  checked :disabled = "vatFlag == 0" name="promoType" required>
+                                            <label for="">Price</label>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
