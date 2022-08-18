@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Notification;
 
 class PromoCodeController extends Controller
 {
-   
+
     public function index()
     {
         // $pro = PromCode::find(2);
@@ -23,17 +23,18 @@ class PromoCodeController extends Controller
         return view('app.promocode.index');
     }
 
-   
+
     public function create()
     {
     }
 
-    
+
     public function store(Request $request)
     {
         $promo = PromCode::create([
             'code' => $request->code,
             'price' => $request->price,
+            'promoType' => $request->promoType,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date
         ]);
@@ -42,7 +43,7 @@ class PromoCodeController extends Controller
 
         // return $users;
         foreach($users as $user) {
-            Sms::send('promo code is : $promo->code' , $user);
+            Sms::send('promo code is : '.$promo->code.'' , $user);
         }
         Session::flash('success' , 'Promo code Add Successfully');
         return redirect()->route('promoes.index');

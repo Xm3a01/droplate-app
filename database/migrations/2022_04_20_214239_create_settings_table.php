@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->double('vat')->default(15);
             $table->integer('points')->nullable();
+            $table->boolean('promoType')->default(false);  // True for prcentge
             $table->timestamps();
         });
     }

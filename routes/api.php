@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth:sanctum'] , function() {
     Route::get('profile' , [UserController::class , 'show'])->name('profile.show');
     Route::post('profile' , [UserController::class , 'update'])->name('profile.update');
     Route::put('change/password/{user}' , [UserController::class , 'change_password'])->name('change.password');
-    
+
     Route::get('favorites' , [FavoriteController::class , 'index'])->name('favorites.index');
     Route::get('notify' , [NotificationController::class , 'index'])->name('notify');
     Route::get('promoCode' , [PromoCodeController::class , 'getPromo'])->name('promo.code');
@@ -86,16 +86,20 @@ Route::group(['middleware' => 'guest:sanctum'] , function() {
     Route::post('reset/password' , [UserController::class , 'reset_password'])->name('reset.password');
     Route::post('reset/password/otp/check' , [UserController::class , 'reset_password_otp_check'])->name('reset.password.otp');
     Route::post('new/password' , [UserController::class , 'new_password'])->name('new.password');
-    Route::post('otp-generate' , [RegisterController::class , 'generate'])->name('otp.generate');   
+    Route::post('otp-generate' , [RegisterController::class , 'generate'])->name('otp.generate');
     Route::post('otp-check' , [RegisterController::class , 'check'])->name('otp.check');
-    
+
     Route::post('social/register' , [SocialAuthController::class , 'create'])->name('social.register');
     Route::post('social/login' , [SocialAuthController::class , 'login'])->name('social.login');
-    
+
     Route::post('driver/register' , [DriverAuthController::class , 'create'])->name('social.register');
     Route::post('driver/login' , [DriverAuthController::class , 'login'])->name('social.login');
 
-    
+
+    Route::post('driver/otp-generate' , [DriverAuthController::class , 'generate'])->name('driver.otp.generate');
+    Route::post('driver/otp-check' , [DriverAuthController::class , 'check'])->name('driver.otp.check');
+
+
 });
 
 Route::group(['prefix'=>'filter' , 'middleware' => 'optional_auth'] , function() {
@@ -122,7 +126,7 @@ Route::group(['prefix'=>'driver' , 'middleware' => 'auth:sanctum'] , function() 
     Route::get('history' , [DriverController::class , 'history'])->name('history');
     Route::get('orders' , [DriverController::class , 'order'])->name('order');
     Route::post('confirm/{id}' , [DriverController::class , 'confirm'])->name('confirm');
-    Route::post('delivered/{id}' , [DriverController::class , 'delivered'])->name('delivered');  
+    Route::post('delivered/{id}' , [DriverController::class , 'delivered'])->name('delivered');
 });
 Route::get('test' , function(){
     return PromCode::all();

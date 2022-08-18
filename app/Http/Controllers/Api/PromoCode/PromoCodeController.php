@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\PromCode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
 class PromoCodeController extends Controller
@@ -19,7 +20,7 @@ class PromoCodeController extends Controller
             if($promo->user_id != Auth::guard('sanctum')->user()->id){
                 $promo->user_id = Auth::guard('sanctum')->user()->id;
                 $promo->save();
-              return response()->json(['price' => (float)$promo->price , 'status' => true]);
+              return response()->json(['value' => (float)$promo->price , 'promoType' => $promo->promoType  ,  'status' => true]);
             } else {
               return  response()->json(['message' => 'Promo Code Allready used' , 'status' => false]);
             }

@@ -3029,7 +3029,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"]::-webkit-file-upload-button {\r\n  /* background: #ffffff; */\r\n  margin: 0px !important;\r\n  border: none;\r\n  padding: 2px;\r\n  border-radius: 5px;\r\n  /* color: #ffffff; */\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"]::-webkit-file-upload-button {\n  /* background: #ffffff; */\n  margin: 0px !important;\n  border: none;\n  padding: 2px;\n  border-radius: 5px;\n  /* color: #ffffff; */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3053,7 +3053,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"]::-webkit-file-upload-button {\r\n  /* background: #ffffff; */\r\n  margin: 0px !important;\r\n  border: none;\r\n  padding: 2px;\r\n  border-radius: 5px;\r\n  /* color: #ffffff; */\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"]::-webkit-file-upload-button {\n  /* background: #ffffff; */\n  margin: 0px !important;\n  border: none;\n  padding: 2px;\n  border-radius: 5px;\n  /* color: #ffffff; */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3077,7 +3077,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"][data-v-0f96d7b8]::-webkit-file-upload-button {\r\n  /* background: #ffffff; */\r\n  margin: 0px !important;\r\n  border: none;\r\n  padding: 2px;\r\n  border-radius: 5px;\r\n  /* color: #ffffff; */\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"][data-v-0f96d7b8]::-webkit-file-upload-button {\n  /* background: #ffffff; */\n  margin: 0px !important;\n  border: none;\n  padding: 2px;\n  border-radius: 5px;\n  /* color: #ffffff; */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3101,7 +3101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-horizontal[data-v-23a2f4a3] {\r\n  display: flex;\r\n  flex: 1 1 auto;\n}\ninput[type=\"file\"][data-v-23a2f4a3]::-webkit-file-upload-button {\r\n  display: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-horizontal[data-v-23a2f4a3] {\n  display: flex;\n  flex: 1 1 auto;\n}\ninput[type=\"file\"][data-v-23a2f4a3]::-webkit-file-upload-button {\n  display: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22321,9 +22321,9 @@ var render = function () {
             _vm._l(_vm.items_info, function (item) {
               return _c("option", { key: item.id, domProps: { value: item } }, [
                 _vm._v(
-                  "\r\n                    " +
+                  "\n                    " +
                     _vm._s(item.name.en) +
-                    "\r\n                "
+                    "\n                "
                 ),
               ])
             }),
@@ -22385,9 +22385,9 @@ var render = function () {
                   { key: item_2.id, domProps: { value: item_2 } },
                   [
                     _vm._v(
-                      "\r\n                    " +
+                      "\n                    " +
                         _vm._s(item_2.name.en) +
-                        "\r\n                "
+                        "\n                "
                     ),
                   ]
                 )
