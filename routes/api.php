@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Favorite\FavoriteController;
 use App\Http\Controllers\Api\PromoCode\PromoCodeController;
+use App\Models\SubCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,3 +127,12 @@ Route::group(['prefix'=>'driver' , 'middleware' => 'auth:sanctum'] , function() 
 Route::get('test' , function(){
     return PromCode::all();
 });
+
+Route::post('test' , function(Request $request){
+    return SubCategory::where('category_id' , $request->id)->get();
+});
+
+
+
+
+

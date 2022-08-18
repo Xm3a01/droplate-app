@@ -25,7 +25,8 @@ class CityController extends Controller
 
     public function filter(Request $request)
     {
-        $city = City::with('regions')->find($request->id);
+        $city = City::with('regions')->where('name->ar' , $request->name)
+        ->orWhere('name->en' , $request->name )->first();
         if(!is_null($city)) {
             return new CityResource($city);
         } else {

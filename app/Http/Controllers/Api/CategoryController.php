@@ -24,9 +24,15 @@ class CategoryController extends Controller
 
     public function filter(Request $request)
     {
-        $category = Category::with('subCategories')->find($request->id);
 
-        return new CategoryResource($category);
+        $category = Category::with('subCategories')->where('name->ar' , $request->name)
+           ->orWhere('name->en' , $request->name )->first();
+
+        if(!is_null($category)) {
+            return new CategoryResource($category);
+        } else {
+            return [];
+        }
     }
 
     public function brand()

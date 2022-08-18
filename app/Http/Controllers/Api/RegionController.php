@@ -25,7 +25,8 @@ class RegionController extends Controller
 
     public function filter(Request $request)
     {
-        $region = Region::with('city')->find($request->id);
+        $region = Region::with('city')->where('name->ar' , $request->name)
+        ->orWhere('name->en' , $request->name )->first();
         // $region->load('city');
         if(!is_null($region)) {
             return new RegionResource($region);

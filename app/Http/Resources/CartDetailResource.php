@@ -18,7 +18,8 @@ class CartDetailResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->product_id,
+            // 'product_id' => ,
             'name' => $this->product->getTranslation('name' , 'en'),
             'ar_name' => $this->product->getTranslation('name' , 'ar'),
             'quantity' => (int)$this->quantity,

@@ -93,7 +93,7 @@ class CartController extends Controller
 
     public function remove($id)
     {
-        $cartDetail = CartDetail::find($id);
+        $cartDetail = CartDetail::where('product_id',$id)->first();
 
         $cartDetail->delete();
         return response()->json(['message' => "Product Delete From Cart Successfully" , 'status' => true]);

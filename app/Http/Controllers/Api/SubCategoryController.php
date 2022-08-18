@@ -24,9 +24,13 @@ class SubCategoryController extends Controller
 
     public function filter(Request $request)
     {
-        $sub_category = SubCategory::with('products')->find($request->id);
-
+        $sub_category = SubCategory::with('products')->where('name->ar' , $request->name)
+        ->orWhere('name->en' , $request->name )->first();
+        if(!is_null($sub_category)) {
         return new SubCategoryResource($sub_category);
+        } else {
+            return [];
+        }
     }
 
 

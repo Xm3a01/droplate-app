@@ -118,4 +118,10 @@ Route::get('test' , function(){
         // $notifi->markAsRead();
 
 });
+
+Route::get('test2' , function(Request $request){
+    $category = Category::all();
+
+    return view('test2' , ['category' => $category]);
+});
 // Category::whereJsonContains('name->en' , 'En-Quinten Kihn')->get();
