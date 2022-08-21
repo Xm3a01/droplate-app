@@ -38,7 +38,7 @@ class DriverController extends Controller
 
         $deiver->assignRole('Driver');
 
-        Session::flash('Employee Add Successfylly');
+        Session::flash('Driver Add Successfylly');
         return redirect()->route('drivers.index');
     }
 
@@ -51,5 +51,21 @@ class DriverController extends Controller
             'cities' => $cities,
             'regions' => $regions,
         ]);
+    }
+    
+    public function update(Request $request , Admin $driver)
+    {
+        if($request->has("password") && $request->password != "") {
+           $request['password'] = Hash::make($request->password);
+           $data = $request->all();
+        } else {
+            $data = $request->except('password');
+        }
+        
+        $driver->update($data);
+        
+        
+        Session::flash('Driver  update Successfylly');
+        return redirect()->route('drivers.index');
     }
 }

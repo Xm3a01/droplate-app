@@ -45,12 +45,23 @@ class DriverController extends Controller
 
     public function order()
     {
-        $driver = Driver::find(Auth::guard('sanctum')->user()->id);
-        return OrderResource::collection($driver->orders);
+        $id = Auth::guard('sanctum')->user()->id;
+        $orders = Order::where('driver_id' , $id)->get();
+        return OrderResource::collection($orders);
     }
 
+    // under-delivered
 
     public function history()
+    {
+        $driver = Auth::guard('sanctum')->user();
+        // return $driver;
+        $notification = $driver->readNotifications; 
+
+        return OrderNotificationResource::collection($notification);
+    }
+
+    public function under_delivered()
     {
         $driver = Auth::guard('sanctum')->user();
         // return $driver;

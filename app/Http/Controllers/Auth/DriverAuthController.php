@@ -53,18 +53,18 @@ class DriverAuthController extends Controller
             // 'device_name' => 'required',
         ]);
 
-        $user = Admin::where('phone', $request->phone)->first();
+        $driver = Admin::where('phone', $request->phone)->first();
 
         // return !Hash::check($request->password , $user->password);
-        if (!$user || ! Hash::check($request->password, $user->password)) {
+        if (!$driver || ! Hash::check($request->password, $driver->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect or user blocked.'],
             ]);
         }
 
         return response()->json([
-            'user' => $user ,
-            'token' => $user->createToken('My-token')->plainTextToken ,
+            'user' => $driver ,
+            'token' => $driver->createToken('My-token')->plainTextToken ,
             'status' => true
         ]);
     }
@@ -82,8 +82,8 @@ class DriverAuthController extends Controller
 
     public function generate(Request $request)
     {
-        $user = Admin::where('phone', $request->phone)->first();
-        if(!$user) {
+        $driver = Admin::where('phone', $request->phone)->first();
+        if(!$driver) {
             $otp = Otp::generate($request->phone, 4, 1);
 
             if($otp->status == true) {
@@ -100,6 +100,7 @@ class DriverAuthController extends Controller
 
     public function check(Request $request)
     {
+        return $request;
         $otp = Otp::validate($request->phone , $request->code);
         return $otp;
     }

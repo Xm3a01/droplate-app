@@ -17,6 +17,7 @@ class OrderNotificationResource extends JsonResource
         return [
             'id' => $this->id,
             'address' => $this['data']['address'],
+            'order_id' => $this['data']['order_id'],
             'read_at' => $this->read_at,
             'created_at' => $this->created_at,
 

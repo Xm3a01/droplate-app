@@ -50,7 +50,7 @@ class Order extends Model
     }
     public function driver()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class , 'driver_id');
     }
     public function orderDetails()
     {
