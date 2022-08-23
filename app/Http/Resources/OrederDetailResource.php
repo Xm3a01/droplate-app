@@ -16,14 +16,14 @@ class OrederDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'order_id' => $this->order_id,
-            'product_id' => $this->product_id,
-            'quantity' => (int)$this->quantity,
-            'selling_price' => $this->selling_price,
-            'purchasing_price' => $this->purchasing_price,
+            'order_id' => $this->order_id ?? "",
+            'product_id' => $this->product_id ?? "",
+            'quantity' => (int)$this->quantity ?? "",
+            'selling_price' => $this->selling_price ?? "",
+            'purchasing_price' => $this->purchasing_price ?? "",
             'discount' => $this->discount,
-            'wholesale_price' => $this->wholesale_price,
-            'product' => new ProductResource($this->product)
+            'wholesale_price' => $this->wholesale_price ?? "",
+            'product' => $this->product ? new ProductResource($this->product) : ""
         ];
     }
 }

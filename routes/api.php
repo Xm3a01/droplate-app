@@ -92,8 +92,8 @@ Route::group(['middleware' => 'guest:sanctum'] , function() {
     Route::post('social/register' , [SocialAuthController::class , 'create'])->name('social.register');
     Route::post('social/login' , [SocialAuthController::class , 'login'])->name('social.login');
 
-    Route::post('driver/register' , [DriverAuthController::class , 'create'])->name('social.register');
-    Route::post('driver/login' , [DriverAuthController::class , 'login'])->name('social.login');
+    Route::post('driver/register' , [DriverAuthController::class , 'create'])->name('driver.register');
+    Route::post('driver/login' , [DriverAuthController::class , 'login'])->name('driver.login');
 
 
     Route::post('driver/otp-generate' , [DriverAuthController::class , 'generate'])->name('driver.otp.generate');
@@ -127,6 +127,9 @@ Route::group(['prefix'=>'driver' , 'middleware' => 'auth:sanctum'] , function() 
     Route::get('orders' , [DriverController::class , 'order'])->name('order');
     Route::post('confirm/{id}' , [DriverController::class , 'confirm'])->name('confirm');
     Route::post('delivered/{id}' , [DriverController::class , 'delivered'])->name('delivered');
+    Route::post('driver/profile' , [DriverAuthController::class , 'profile'])->name('driver.profile');
+    Route::post('driver/edit_profile' , [DriverAuthController::class , 'edit_profile'])->name('driver.edit_profile');
+    Route::post('driver/logout' , [DriverAuthController::class , 'DriverLogout'])->name('driver.logout');
 });
 Route::get('test' , function(){
     return PromCode::all();

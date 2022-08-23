@@ -2,17 +2,62 @@
 
 namespace App\Http\Controllers\Api;
 
+use Exception;
 use App\Models\Admin as Driver;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\NotificationResource;
 use App\Http\Resources\OrderNotificationResource;
+use App\Http\Resources\UserResource;
 
 class DriverController extends Controller
 {
+
+
+    public function profile()
+    {
+        $driver = Auth::guard('sanctum')->user();
+
+        return new UserResource($driver);
+    }
+
+    public function edit_profile(Request $request)
+    {
+        $driver_id = Auth::guard('sanctum')->user()->id;
+
+        $driver = Driver::find($driver_id);
+
+        
+        if($request->has('name')) {
+            $driver->name = $request->name;
+        }
+        if($request->has('email')) {
+            $driver->email = $request->email;
+        }
+        if($request->has('phone')) {
+            $driver->phone = $request->phone;
+        }
+        if($request->has('gender')) {
+            $driver->gender = $request->gender;
+        }
+        if($request->has('age')) {
+            $driver->age = $request->age;
+        }
+        if($request->has('address')) {
+            $driver->address = $request->address;
+        }
+
+        if($driver->save()){
+            return  response()->json(['message' => 'Profile update Successfully' , 'status'=> true]);
+        } else {
+            return  response()->json(['message' => 'something Wrong !' , 'status'=> false]);
+        }
+    }
+
     public function index()
     {
         $driver = Auth::guard('sanctum')->user();
@@ -24,6 +69,7 @@ class DriverController extends Controller
 
     public function confirm($id)
     {
+       try {
         $driver = Driver::find(Auth::guard('sanctum')->user()->id);
         $notification = $driver->unreadNotifications()->find($id);
         $jsonNotify = json_decode($notification);
@@ -40,28 +86,36 @@ class DriverController extends Controller
         $notification->markAsRead();
 
         return new OrderResource($order);
+    } catch (Exception $exception) {
+        logger([
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            ]);
+            return response()->json([ 'message' => 'Order already been confirmed or something wrong !' , 'status' => false]);
+        } 
 
     }
 
     public function order()
     {
+        try {
         $id = Auth::guard('sanctum')->user()->id;
         $orders = Order::where('driver_id' , $id)->get();
         return OrderResource::collection($orders);
+        
+    } catch (Exception $exception) {
+             logger([
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            ]);
+          return response()->json([ 'message' => ' something wrong !' , 'status' => false]);
+        }
     }
 
-    // under-delivered
 
     public function history()
-    {
-        $driver = Auth::guard('sanctum')->user();
-        // return $driver;
-        $notification = $driver->readNotifications; 
-
-        return OrderNotificationResource::collection($notification);
-    }
-
-    public function under_delivered()
     {
         $driver = Auth::guard('sanctum')->user();
         // return $driver;
@@ -73,14 +127,17 @@ class DriverController extends Controller
 
     public function delivered($id)
     {
+       try {
         $order = Order::find($id);
         $driver = Driver::find(Auth::guard('sanctum')->user()->id);
         $order->order_status =  Order::DONE;
         $driver->busy = Driver::NOTBUSY;
-        $order->progress = 5;
         $driver->save();
         $order->save();
-
-        return response()->json(['message' => 'Order Done !' , 'status' => true]);
+        
+       } catch (Exception $exception) {
+            // $this->logErrors($exception);
+            return response()->json([ 'message' => 'There is no Order with this ID try another one !' , 'status' => false]);
+        }
     }
 }
