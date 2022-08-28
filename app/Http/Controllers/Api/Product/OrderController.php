@@ -36,6 +36,7 @@ class OrderController extends Controller
         // final code for order
         $order = $request->order;
         $user_id = Auth::guard('sanctum')->user()->id;
+        // $user_id;
         $order['user_id'] = $user_id;
         $ordr = Order::create($order);
         foreach ($order['order_details'] as $key => $order_detail) {
