@@ -127,9 +127,11 @@ Route::group(['prefix'=>'driver' , 'middleware' => 'auth:sanctum'] , function() 
     Route::get('orders' , [DriverController::class , 'order'])->name('order');
     Route::post('confirm/{id}' , [DriverController::class , 'confirm'])->name('confirm');
     Route::post('delivered/{id}' , [DriverController::class , 'delivered'])->name('delivered');
-    Route::post('driver/profile' , [DriverAuthController::class , 'profile'])->name('driver.profile');
-    Route::post('driver/edit_profile' , [DriverAuthController::class , 'edit_profile'])->name('driver.edit_profile');
-    Route::post('driver/logout' , [DriverAuthController::class , 'DriverLogout'])->name('driver.logout');
+    Route::get('order_finish' , [DriverController::class , 'order_finish'])->name('driver.order_finish');
+    Route::get('filter' , [DriverController::class , 'filter'])->name('driver.filter');
+    Route::post('profile' , [DriverController::class , 'profile'])->name('driver.profile');
+    Route::post('edit_profile' , [DriverController::class , 'edit_profile'])->name('driver.edit_profile');
+    Route::post('logout' , [DriverAuthController::class , 'DriverLogout'])->name('driver.logout');
 });
 Route::get('test' , function(){
     return PromCode::all();

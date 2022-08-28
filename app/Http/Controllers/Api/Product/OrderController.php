@@ -44,6 +44,9 @@ class OrderController extends Controller
             $product->save();
         }
 
+        $ordr->load('user');
+
+        // return $ordr;
         $drivers = Admin::role('Driver')->where('region_id' , $order['region_id'])
                     ->where('city_id' , $order['city_id'])->where('busy',Admin::NOTBUSY)->get();
 

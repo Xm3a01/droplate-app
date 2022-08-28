@@ -224,7 +224,7 @@ trait DataTableTrait
                     <div class="col-md-3"><a class="btn btn-danger btn-xs" data-url = "' . route('ads.destroy', $ad->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
                   </div>';
             })
-          
+
 
 
         ->make(true);
@@ -251,7 +251,7 @@ trait DataTableTrait
             ->addColumn('ar_name', function ($city) {
                 return $city->name ? $city->getTranslation('name' , 'ar') : "";
             })
-            
+
             ->addColumn('queck', function ($city) {
                 return $city->regular_delivery_price;
             })
@@ -269,7 +269,7 @@ trait DataTableTrait
                     <div class="col-md-3"><a class="btn btn-danger btn-xs" data-url = "' . route('cities.destroy', $city->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
                   </div>';
             })
-          
+
 
 
         ->make(true);
@@ -321,7 +321,7 @@ trait DataTableTrait
                     <div class="col-md-3"><a class="btn btn-danger btn-xs" data-url = "' . route('regions.destroy', $region->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
                   </div>';
             })
-          
+
 
 
         ->make(true);
@@ -358,7 +358,7 @@ trait DataTableTrait
             // })
             ->addColumn('permission', function ($employee) {
                 return $employee->permissions->first()->name ?? "";
-                
+
             })
             ->addColumn('action', function ($employee) {
 
@@ -403,7 +403,7 @@ trait DataTableTrait
 
             })
 
-            
+
 
             ->addColumn('action', function ($employee) {
 
@@ -413,7 +413,7 @@ trait DataTableTrait
                   </div>';
             })
 
-            
+
 
         ->make(true);
     }
@@ -444,7 +444,7 @@ trait DataTableTrait
                     <div class="col-md-1"><a class="btn btn-danger btn-xs" data-url = "' . route('users.destroy', $user->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
                   </div>';
             })
-          
+
 
 
         ->make(true);
@@ -484,7 +484,7 @@ trait DataTableTrait
                     case 1:
                        return 'Done';
                     break;
-                    
+
                     default:
                        return 'in Progress ...';
                     break;
@@ -502,7 +502,7 @@ trait DataTableTrait
                         break;
                     case '4':
                         $progress = 'Delivery in progress';
-                        break;                   
+                        break;
                     case '5':
                         $progress ='Delivered';
                         break;
@@ -514,6 +514,7 @@ trait DataTableTrait
                         <option selected="selected" value="">-- Select -- </option>
                         <option value="3">Preparation in progress</option>
                         <option value="4">Delivery in progress</option>
+                        <option value="5">Delivered</option>
                 </select>
                 </div>
                   </div>';
@@ -524,7 +525,7 @@ trait DataTableTrait
                     <div class="col-md-1"><a class="btn btn-danger btn-xs" data-url = "' . route('orders.destroy', $order->id) . '" href=""><i class ="fa fa-trash"></i></a></div>
                   </div>';
             })
-          
+
             ->rawColumns(['order_progress' , 'action'])
 
         ->make(true);

@@ -23,12 +23,14 @@ class DriverAuthController extends Controller
         ]);
         $driver =  Admin::create([
             // 'id' => $request->name,
-            'name' => 'Driver',
+            'name' => $request->name,
             'phone' => $request->phone,
             // 'email' => 'fak@app.com',
             // 'age' => $request->age,
+            'city_id' => $request->city_id,
+            'region_id' => $request->region_id,
             // 'gender' => $request->gender,
-            // 'address' => $request->address,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
 
 

@@ -31,7 +31,7 @@ class DriverController extends Controller
 
         $driver = Driver::find($driver_id);
 
-        
+
         if($request->has('name')) {
             $driver->name = $request->name;
         }
@@ -51,6 +51,14 @@ class DriverController extends Controller
             $driver->address = $request->address;
         }
 
+        if($request->has('city_id')) {
+            $driver->city_id = $request->city_id;
+        }
+
+        if($request->has('region_id')) {
+            $driver->region_id = $request->region_id;
+        }
+
         if($driver->save()){
             return  response()->json(['message' => 'Profile update Successfully' , 'status'=> true]);
         } else {
@@ -62,7 +70,7 @@ class DriverController extends Controller
     {
         $driver = Auth::guard('sanctum')->user();
         // return $driver;
-        $notification = $driver->unreadNotifications; 
+        $notification = $driver->unreadNotifications;
 
         return OrderNotificationResource::collection($notification);
     }
@@ -93,7 +101,7 @@ class DriverController extends Controller
             'line' => $exception->getLine(),
             ]);
             return response()->json([ 'message' => 'Order already been confirmed or something wrong !' , 'status' => false]);
-        } 
+        }
 
     }
 
@@ -103,7 +111,7 @@ class DriverController extends Controller
         $id = Auth::guard('sanctum')->user()->id;
         $orders = Order::where('driver_id' , $id)->get();
         return OrderResource::collection($orders);
-        
+
     } catch (Exception $exception) {
              logger([
             'message' => $exception->getMessage(),
@@ -119,9 +127,29 @@ class DriverController extends Controller
     {
         $driver = Auth::guard('sanctum')->user();
         // return $driver;
-        $notification = $driver->readNotifications; 
+        $notification = $driver->readNotifications;
 
         return OrderNotificationResource::collection($notification);
+    }
+
+
+    public function order_finish()
+    {
+        $driver_id = Auth::guard('sanctum')->user()->id;
+        // return $driver;
+        $orders = Order::where(['driver_id' => $driver_id , 'progress' => "5" , 'order_status' => "1"])->get();
+
+        return OrderResource::collection($orders);
+    }
+
+
+
+    public function filter(Request $request)
+    {
+        $orders = Order::whereHas('user' , function($query) use ($request){
+            $query->where('name' ,'like' , '%'.$request->name.'%');
+        });
+        return OrderResource::collection($orders->get());
     }
 
 
@@ -132,9 +160,10 @@ class DriverController extends Controller
         $driver = Driver::find(Auth::guard('sanctum')->user()->id);
         $order->order_status =  Order::DONE;
         $driver->busy = Driver::NOTBUSY;
+        $order->progress = "5";
         $driver->save();
         $order->save();
-        
+
        } catch (Exception $exception) {
             // $this->logErrors($exception);
             return response()->json([ 'message' => 'There is no Order with this ID try another one !' , 'status' => false]);

@@ -30,6 +30,7 @@ class OrderResource extends JsonResource
             'total_purchasing_price' => (float)$this->total_purchasing_price,
             'total_selling_price' => (float)$this->total_selling_price,
             'total_wholesale_price' => (float)$this->total_wholesale_price,
+            'created_at' => $this->created_at,
             'order_details'  => OrederDetailResource::collection($this->orderDetails)
         ];
     }

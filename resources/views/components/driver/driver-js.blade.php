@@ -15,11 +15,11 @@
 <script>
     $(function () {
       var table = $("#loading-table").DataTable({
-        "responsive": true, 
+        "responsive": true,
         "searching": false,
-        // "lengthChange": false, 
-        "autoWidth": false, 
-        "paging": true, 
+        // "lengthChange": false,
+        "autoWidth": false,
+        "paging": true,
         "info":true,
         serverSide: true,
         processing: true,
@@ -41,7 +41,7 @@
             {data: 'city',name: 'city'},
             {data: 'busy',name: 'busy'},
             {data: 'address',name: 'address'},
-          
+
             {data: 'action', name: 'action'},
             // Recived
           ],

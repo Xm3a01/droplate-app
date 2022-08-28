@@ -33,7 +33,7 @@ class OrderNotification extends Notification
         return ['database'];
     }
 
-    
+
 
     /**
      * Get the array representation of the notification.
@@ -46,7 +46,8 @@ class OrderNotification extends Notification
         return [
             'order_id' => $this->order->id,
             'address' => $this->order->address,
-            
+            'client_name' => $this->order->user ? $this->order->user->name : "",
+            'order_created_at' => $this->order->created_at
 
         ];
     }
