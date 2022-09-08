@@ -109,7 +109,7 @@ class DriverController extends Controller
     {
         try {
         $id = Auth::guard('sanctum')->user()->id;
-        $orders = Order::where('driver_id' , $id)->get();
+        $orders = Order::where('driver_id' , $id)->where('progress' , "2")->get();
         return OrderResource::collection($orders);
 
     } catch (Exception $exception) {

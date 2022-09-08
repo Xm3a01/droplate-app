@@ -33,7 +33,9 @@ class Order extends Model
         'is_payed',
         'driver_id',
         'city_id',
-        'region_id'
+        'region_id',
+        'lng',
+        'lat'
     ];
 
     public function user()

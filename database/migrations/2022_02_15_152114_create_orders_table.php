@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             
             $table->string('client_phone');
             $table->string('address');
+            $table->string('lat');
+            $table->string('lng');
             $table->string('order_status')->default(2);
             $table->integer('progress')->default(1);
             $table->float('delivery_price');

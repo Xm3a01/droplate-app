@@ -22,6 +22,8 @@ class OrderResource extends JsonResource
             'client_name' => $this->user ? $this->user->name : '',
             'client_phone' => $this->client_phone,
             'address' => $this->address,
+            'lng' => $this->lng,
+            'lat' => $this->lat,
             'order_status' => $this->order_status,
             'progress' => $this->progress,
             'vat' =>   $this->vat(),
@@ -31,6 +33,7 @@ class OrderResource extends JsonResource
             'total_selling_price' => (float)$this->total_selling_price,
             'total_wholesale_price' => (float)$this->total_wholesale_price,
             'created_at' => $this->created_at,
+            'order_finish_date' => ($this->created_at == $this->updated_at ? "" : $this->updated_at),
             'order_details'  => OrederDetailResource::collection($this->orderDetails)
         ];
     }
